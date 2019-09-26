@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ issue.summary }}{% endblock %}
+
+{% block body %}
+    {% include 'partial/single_issue_display.html' %}
+
+    <a href="{% url 'index' %}" class="btn btn-primary mt-3 col-4 offset-4">Вернуться на главную</a>
+{% endblock %}

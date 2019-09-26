@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Изменить задачу{% endblock %}
+
+{% block body %}
+    <form action="{% url 'update_issue' issue.pk %}" method="POST">
+        {% include 'partial/issue_form.html' with button_text="Редактировать задачу" %}
+    </form>
+{% endblock %}

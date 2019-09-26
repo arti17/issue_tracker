@@ -1,0 +1,13 @@
+<div class="list-group">
+    <a href="" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ issue.summary }}</h5>
+            <small class="text-primary">{{ issue.status }}</small>
+        </div>
+        <hr>
+        <p class="mb-1">{{ issue.description }}</p>
+        <hr>
+        <small class="text-muted">Тип: <b class="text-primary">{{ issue.type }}</b></small><br>
+        <small class="text-muted">Дата создания: <b class="text-primary">{{ issue.create_date|date:'d.m.Y H:i:s' }}</b></small>
+    </a>
+</div>
