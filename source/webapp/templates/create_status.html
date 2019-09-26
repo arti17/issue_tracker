@@ -1,16 +1,10 @@
 {% extends 'base.html' %}
-{% load widget_tweaks %}
 
 {% block title %}Добавить статус{% endblock %}
 
 {% block body %}
     <h3 class="text-center">Добавить статус</h3>
     <form action="{% url 'create_status' %}" method="POST">
-        {% csrf_token %}
-        {{ form.name|add_class:"form-control" }}
-        <div class="text-center mt-3">
-            <input type="submit" value="Добавить" class="btn btn-success">
-            <a href="{% url 'statuses_list' %}" class="btn btn-primary">Отмена</a>
-        </div>
+        {% include 'partial/status_form.html' with value='Добавить' %}
     </form>
 {% endblock %}

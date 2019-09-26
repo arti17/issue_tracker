@@ -1,0 +1,8 @@
+{% load widget_tweaks %}
+
+{% csrf_token %}
+{{ form.name|add_class:"form-control" }}
+<div class="text-center mt-3">
+    <input type="submit" value="{{ value }}" class="btn btn-success">
+    <a href="{% url 'types_list' %}" class="btn btn-primary">Отмена</a>
+</div>
