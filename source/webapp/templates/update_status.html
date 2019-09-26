@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Изменить статус{% endblock %}
+
+{% block body %}
+    <h3 class="text-center">Редактирование статуса</h3>
+    <form action="{% url 'update_status' status.pk %}" method="POST">
+        {% csrf_token %}
+        {{ form.name|add_class:"form-control" }}
+        <div class="text-center mt-3">
+            <input type="submit" value="Редактировать" class="btn btn-success">
+            <a href="{% url 'statuses_list' %}" class="btn btn-primary">Отмена</a>
+        </div>
+    </form>
+{% endblock %}

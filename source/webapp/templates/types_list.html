@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Типы{% endblock %}
+
+{% block body %}
+    <h3 class="text-center">Типы задач</h3>
+    {% if errors %}
+        <div class="alert alert-danger" role="alert">
+            <span class="text-center">Невозможно удалить, так как есть связанные задачи.</span>
+        </div>
+        <a href="{% url 'index' %}" class="btn btn-secondary mt-3 col-4 offset-4">Перейти к задачам</a>
+        <a href="{% url 'types_list' %}" class="btn btn-primary mt-3 col-4 offset-4">Перейти к типам задач</a>
+    {% endif %}
+    <ul class="list-group">
+        {% for type in types %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ type }}
+                <span class="badge badge-pill bg-light">
+                    <a href="{% url 'update_type' type.pk %}" class="btn text-primary">Редактировать</a>
+                    <form action="{% url 'delete_type' type.pk %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn text-danger">Удалить</button>
+                    </form>
+                </span>
+            </li>
+        {% endfor %}
+
+        <form action="{% url 'create_type' %}">
+            <button type="submit" class="btn btn-success mt-3 col-4 offset-4">Добавить тип задачи</button>
+        </form>
+    </ul>
+
+{% endblock %}

@@ -10,3 +10,11 @@ class IssueForm(forms.Form):
                                     empty_label='Выберите статус задачи')
     type = forms.ModelChoiceField(queryset=Type.objects.all(), required=True, label='Тип задачи',
                                   empty_label='Выберите тип задачи')
+
+
+class StatusForm(forms.Form):
+    name = forms.CharField(max_length=20, required=True, label='Статус')
+
+
+class TypeForm(forms.Form):
+    name = forms.CharField(max_length=20, required=True, label='Тип задачи')
