@@ -10,6 +10,7 @@ class IndexView(ListView):
     template_name = 'issue/index.html'
     context_object_name = 'issues'
     model = Issue
+    ordering = '-create_date'
     paginate_by = 2
     paginate_orphans = 0
 
