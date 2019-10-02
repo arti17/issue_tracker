@@ -1,16 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from webapp.models import Issue
 from webapp.forms import IssueForm
-from django.views.generic import TemplateView, View
+from django.views.generic import TemplateView, View, ListView
 
 
-class IndexView(TemplateView):
+class IndexView(ListView):
     template_name = 'issue/index.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['issues'] = Issue.objects.all()
-        return context
+    context_object_name = 'issues'
+    model = Issue
+    paginate_by = 2
+    paginate_orphans = 0
 
 
 class IssueView(TemplateView):
