@@ -1,0 +1,37 @@
+<nav>
+    <form action="" method="get">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" href="?page=1" tabindex="-1" aria-disabled="true">В начало</a>
+            </li>
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1"
+                       aria-disabled="true">Предыдущая</a>
+                </li>
+            {% else %}
+                <li class="page-item">
+                    <a class="page-link" aria-disabled="false">Предыдущая</a>
+                </li>
+            {% endif %}
+            <span class="current">
+        </span>
+            <li class="page-item">
+{#                <a class="page-link">Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.</a>#}
+               <p class="ml-5">Страница <input class="form-control w-25 d-inline-block" type="text" name="page" value="{{ page_obj.number }}" maxlength="3"> из {{ page_obj.paginator.num_pages }}</p>
+            </li>
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая</a>
+                </li>
+            {% else %}
+                <li class="page-item">
+                    <a class="page-link" aria-disabled="false">Следующая</a>
+                </li>
+            {% endif %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">В конец</a>
+            </li>
+        </ul>
+    </form>
+</nav>
