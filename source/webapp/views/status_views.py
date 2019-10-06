@@ -4,6 +4,7 @@ from django.urls import reverse
 from webapp.models import Status
 from webapp.forms import StatusForm
 from django.views.generic import View, ListView, CreateView
+from .base_views import UpdateView
 
 
 class StatusView(ListView):
@@ -22,23 +23,12 @@ class StatusCreateView(CreateView):
         return reverse('statuses_list')
 
 
-class StatusUpdateView(View):
-    def get(self, request, *args, **kwargs):
-        status_pk = kwargs.get('pk')
-        status = get_object_or_404(Status, pk=status_pk)
-        form = StatusForm(data={'name': status.name})
-        return render(request, 'status/update_status.html', {'form': form, 'status': status})
-
-    def post(self, request, *args, **kwargs):
-        form = StatusForm(data=request.POST)
-        status_pk = kwargs.get('pk')
-        status = get_object_or_404(Status, pk=status_pk)
-        if form.is_valid():
-            status.name = form.cleaned_data['name']
-            status.save()
-            return redirect('statuses_list')
-        else:
-            return render(request, 'status/update_status.html', {'form': form, 'status': status})
+class StatusUpdateView(UpdateView):
+    model = Status
+    class_form = StatusForm
+    template_name = 'status/update_status.html'
+    context_key = 'status'
+    success_url = '/statuses/'
 
 
 class StatusDeleteView(View):

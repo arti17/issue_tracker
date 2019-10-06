@@ -3,7 +3,7 @@ from django.urls import reverse
 from webapp.models import Issue
 from webapp.forms import IssueForm
 from django.views.generic import View, ListView, CreateView
-from .base_views import DetailView
+from .base_views import DetailView, UpdateView
 
 
 class IndexView(ListView):
@@ -30,31 +30,11 @@ class IssueCreateView(CreateView):
         return reverse('index')
 
 
-class IssueUpdateView(View):
-    def get(self, request, *args, **kwargs):
-        issue_pk = kwargs.get('pk')
-        issue = get_object_or_404(Issue, pk=issue_pk)
-        form = IssueForm(data={
-            'summary': issue.summary,
-            'description': issue.description,
-            'status': issue.status.id,
-            'type': issue.type.id
-        })
-        return render(request, 'issue/update_issue.html', {'form': form, 'issue': issue})
-
-    def post(self, request, *args, **kwargs):
-        form = IssueForm(data=request.POST)
-        issue_pk = kwargs.get('pk')
-        issue = get_object_or_404(Issue, pk=issue_pk)
-        if form.is_valid():
-            issue.summary = form.cleaned_data['summary']
-            issue.description = form.cleaned_data['description']
-            issue.status = form.cleaned_data['status']
-            issue.type = form.cleaned_data['type']
-            issue.save()
-            return redirect('index')
-        else:
-            return render(request, 'issue/update_issue.html', {'form': form, 'issue': issue})
+class IssueUpdateView(UpdateView):
+    model = Issue
+    class_form = IssueForm
+    template_name = 'issue/update_issue.html'
+    context_key = 'issue'
 
 
 class IssueDeleteView(View):
