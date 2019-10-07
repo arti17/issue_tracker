@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}Удалить статус{% endblock %}
+
+{% block body %}
+
+    <form action="{% url 'delete_status' status.pk %}" method="POST">
+        {% include 'partial/confirm_of_delete.html' with url="/statuses/" %}
+    </form>
+{% endblock %}

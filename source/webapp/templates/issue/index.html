@@ -26,7 +26,11 @@
                     <div class="btn-group-vertical" role="group">
                         <a href="{% url 'detail' issue.pk %}" class="btn btn-primary">Просмотр</a>
                         <a href="{% url 'update_issue' issue.pk %}" class="btn btn-success">Редактировать</a>
-                        <a href="{% url 'delete_issue' issue.pk %}" class="btn btn-danger">Удалить</a>
+                        {#                        <a href="{% url 'delete_issue' issue.pk %}" class="btn btn-danger">Удалить</a>#}
+                        <form action="{% url 'delete_issue' issue.pk %}" method="POST" class="w-100">
+                            {% csrf_token %}
+                                <input type="submit" value="Удалить" class="btn btn-danger w-100">
+                        </form>
                     </div>
                 </td>
             </tr>

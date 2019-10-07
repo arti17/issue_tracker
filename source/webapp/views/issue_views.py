@@ -1,9 +1,8 @@
-from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from webapp.models import Issue
 from webapp.forms import IssueForm
-from django.views.generic import View, ListView, CreateView
-from .base_views import DetailView, UpdateView
+from django.views.generic import ListView, CreateView
+from .base_views import DetailView, UpdateView, DeleteView
 
 
 class IndexView(ListView):
@@ -34,15 +33,12 @@ class IssueUpdateView(UpdateView):
     model = Issue
     class_form = IssueForm
     template_name = 'issue/update_issue.html'
-    context_key = 'issue'
+    context_object_name = 'issue'
 
 
-class IssueDeleteView(View):
-    def get(self, request, pk):
-        issue = get_object_or_404(Issue, pk=pk)
-        return render(request, 'issue/delete_issue.html', {'issue': issue})
-
-    def post(self, request, pk):
-        issue = get_object_or_404(Issue, pk=pk)
-        issue.delete()
-        return redirect('index')
+class IssueDeleteView(DeleteView):
+    model = Issue
+    confirm_template_name = 'issue/delete_issue.html'
+    context_object_name = 'issue'
+    success_url = '/'
+    confirm_of_delete = True

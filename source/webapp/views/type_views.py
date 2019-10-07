@@ -1,9 +1,8 @@
-from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from webapp.models import Type
 from webapp.forms import TypeForm
 from django.views.generic import View, ListView, CreateView
-from .base_views import UpdateView
+from .base_views import UpdateView, DeleteView
 
 
 class TypeView(ListView):
@@ -26,15 +25,14 @@ class TypeUpdateView(UpdateView):
     model = Type
     class_form = TypeForm
     template_name = 'type/update_type.html'
-    context_key = 'type'
+    context_object_name = 'type'
     success_url = '/types/'
 
 
-class TypeDeleteView(View):
-    def post(self, request, pk):
-        type = get_object_or_404(Type, pk=pk)
-        try:
-            type.delete()
-            return redirect('types_list')
-        except BaseException as error:
-            return render(request, 'type/types_list.html', {'errors': error})
+class TypeDeleteView(DeleteView):
+    model = Type
+    confirm_template_name = 'type/confirm_of_delete_type.html'
+    context_object_name = 'type'
+    template_name = 'type/types_list.html'
+    success_url = '/types/'
+    confirm_of_delete = False
