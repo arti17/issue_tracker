@@ -1,8 +1,8 @@
 from django.urls import reverse
 from webapp.models import Issue
 from webapp.forms import IssueForm
-from django.views.generic import ListView, CreateView
-from .base_views import DetailView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView
+from .base_views import DetailView, DeleteView
 
 
 class IndexView(ListView):
@@ -34,6 +34,8 @@ class IssueUpdateView(UpdateView):
     class_form = IssueForm
     template_name = 'issue/update_issue.html'
     context_object_name = 'issue'
+    success_url = '/'
+    fields = ['summary', 'description', 'status', 'type']
 
 
 class IssueDeleteView(DeleteView):

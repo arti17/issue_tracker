@@ -2,8 +2,8 @@ from django.urls import reverse
 
 from webapp.models import Status
 from webapp.forms import StatusForm
-from django.views.generic import View, ListView, CreateView
-from .base_views import UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView
+from .base_views import DeleteView
 
 
 class StatusView(ListView):
@@ -28,6 +28,7 @@ class StatusUpdateView(UpdateView):
     template_name = 'status/update_status.html'
     context_object_name = 'status'
     success_url = '/statuses/'
+    fields = ['name']
 
 
 class StatusDeleteView(DeleteView):

@@ -1,8 +1,8 @@
 from django.urls import reverse
 from webapp.models import Type
 from webapp.forms import TypeForm
-from django.views.generic import View, ListView, CreateView
-from .base_views import UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView
+from .base_views import DeleteView
 
 
 class TypeView(ListView):
@@ -27,6 +27,7 @@ class TypeUpdateView(UpdateView):
     template_name = 'type/update_type.html'
     context_object_name = 'type'
     success_url = '/types/'
+    fields = ['name']
 
 
 class TypeDeleteView(DeleteView):
