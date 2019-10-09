@@ -14,7 +14,7 @@ class IndexView(ListView):
 
 
 class IssueView(DetailView):
-    template_name = 'issue/detail.html'
+    template_name = 'issue/issue_detail.html'
     model = Issue
     context_key = 'issue'
 
@@ -34,7 +34,7 @@ class IssueUpdateView(UpdateView):
     template_name = 'issue/update_issue.html'
     context_object_name = 'issue'
     success_url = '/'
-    fields = ['summary', 'description', 'status', 'type']
+    fields = ['summary', 'description', 'status', 'type', 'project']
 
 
 class IssueDeleteView(DeleteView):

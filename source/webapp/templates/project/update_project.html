@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}Редактировать проект{% endblock %}
+
+{% block body %}
+    <h3 class="text-center">Редактировать проект</h3>
+    <form action="{% url 'update_project' project.pk %}" method="POST">
+        {% include 'partial/project_form.html' with button_text='Редактировать' %}
+    </form>
+{% endblock %}

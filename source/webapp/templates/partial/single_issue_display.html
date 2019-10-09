@@ -5,7 +5,7 @@
             <small class="text-primary">{{ issue.status }}</small>
         </div>
         <hr>
-        <p class="mb-1">{{ issue.description }}</p>
+        <p class="mb-1">{{ issue.description|linebreaks }}</p>
         <hr>
         <small class="text-muted">Тип: <b class="text-primary">{{ issue.type }}</b></small><br>
         <small class="text-muted">Дата создания: <b class="text-primary">{{ issue.create_date|date:'d.m.Y H:i:s' }}</b></small>

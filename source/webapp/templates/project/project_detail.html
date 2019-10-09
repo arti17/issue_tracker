@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ project.summary }}{% endblock %}
+
+{% block body %}
+    <div class="list-group">
+        <a href="" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Проект: <span class="text-primary">{{ project.summary }}</span></h5>
+            </div>
+            <hr>
+            <p class="mb-1">Описание: <span class="text-primary">{{ project.description }}</span></p>
+            <hr>
+            <small class="text-muted">Дата создания: <b class="text-primary">{{ project.create_date|date:'d.m.Y H:i:s' }}</b></small>
+            <br>
+            <small class="text-muted">Дата редактирования: <b class="text-primary">{{ project.update_date|date:'d.m.Y H:i:s' }}</b></small>
+        </a>
+
+        <div class="alert alert-primary">
+            <div class="d-flex w-100 justify-content-between">
+                <h6 class="mb-1">Задачи проекта</h6>
+            </div>
+            {% for issue in issues %}
+                <p class="mb-1"><a href="{% url 'issue_detail' issue.pk %}">{{ issue }}</a></p>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <a href="{% url 'projects_list' %}" class="btn btn-primary mt-3 col-4 offset-4">Назад</a>
+{% endblock %}

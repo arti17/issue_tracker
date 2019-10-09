@@ -5,5 +5,5 @@
 {% block body %}
     {% include 'partial/single_issue_display.html' %}
 
-    <a href="{% url 'index' %}" class="btn btn-primary mt-3 col-4 offset-4">Вернуться на главную</a>
+    <button onclick="history.back();" class="btn btn-primary mt-3 col-4 offset-4">Назад</button>
 {% endblock %}

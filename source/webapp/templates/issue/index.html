@@ -17,14 +17,14 @@
         <tbody>
         {% for issue in issues %}
             <tr>
-                <th scope="row"><a href="{% url 'detail' issue.pk %}">{{ issue.summary }}</a></th>
-                <td>{{ issue.description }}</td>
+                <th scope="row"><a href="{% url 'issue_detail' issue.pk %}">{{ issue.summary }}</a></th>
+                <td>{{ issue.description|linebreaks }}</td>
                 <td class="align-middle text-center">{{ issue.status }}</td>
                 <td class="align-middle text-center">{{ issue.type }}</td>
                 <td class="align-middle text-center">{{ issue.create_date|date:"d.m.Y H:i:s" }}</td>
                 <td class="align-middle">
                     <div class="btn-group-vertical" role="group">
-                        <a href="{% url 'detail' issue.pk %}" class="btn btn-primary">Просмотр</a>
+                        <a href="{% url 'issue_detail' issue.pk %}" class="btn btn-primary">Просмотр</a>
                         <a href="{% url 'update_issue' issue.pk %}" class="btn btn-success">Редактировать</a>
                         <a href="{% url 'delete_issue' issue.pk %}" class="btn btn-danger">Удалить</a>
                     </div>
