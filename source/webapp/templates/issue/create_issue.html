@@ -3,7 +3,7 @@
 {% block title %}Создать задачу{% endblock %}
 
 {% block body %}
-    <form action="{% url 'create_issue' %}" method="POST">
+    <form action="" method="POST">
         {% include 'partial/issue_form.html' with button_text="Создать задачу" %}
     </form>
 {% endblock %}

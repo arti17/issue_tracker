@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 
-from webapp.forms import ProjectForm
+from webapp.forms import ProjectForm, IssueProjectForm
 from webapp.models import Project
 
 
@@ -34,6 +34,17 @@ class ProjectCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('projects_list')
+
+
+class ProjectCreateIssueView(CreateView):
+    template_name = 'issue/create_issue.html'
+    form_class = IssueProjectForm
+
+    def form_valid(self, form):
+        project_pk = self.kwargs.get('pk')
+        project = get_object_or_404(Project, pk=project_pk)
+        project.issues.create(**form.cleaned_data)
+        return redirect('project_detail', pk=project_pk)
 
 
 class ProjectDeleteView(DeleteView):

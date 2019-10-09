@@ -18,7 +18,7 @@
 
         <div class="alert alert-primary">
             <div class="d-flex w-100 justify-content-between">
-                <h6 class="mb-1">Задачи проекта</h6>
+                <h6 class="mb-1">Задачи проекта:</h6>
             </div>
             {% for issue in issues %}
                 <p class="mb-1"><a href="{% url 'issue_detail' issue.pk %}">{{ issue }}</a></p>
@@ -26,6 +26,6 @@
         </div>
 
     </div>
-
+    <a href="{% url 'create_project_issue' project.pk %}" class="btn btn-success mt-3 col-4 offset-4">Создать задачу для проекта</a>
     <a href="{% url 'projects_list' %}" class="btn btn-primary mt-3 col-4 offset-4">Назад</a>
 {% endblock %}
