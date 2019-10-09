@@ -7,6 +7,7 @@ class Issue(models.Model):
     status = models.ForeignKey('webapp.Status', related_name='issues', on_delete=models.PROTECT, verbose_name='Статус')
     type = models.ForeignKey('webapp.Type', related_name='issues', on_delete=models.PROTECT, verbose_name='Тип')
     create_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+    project = models.ForeignKey('webapp.Project', related_name='issues', on_delete=models.PROTECT, verbose_name='Проект')
 
     def __str__(self):
         return self.summary
@@ -36,3 +37,17 @@ class Type(models.Model):
     class Meta:
         verbose_name = 'Тип задачи'
         verbose_name_plural = 'Типы задач'
+
+
+class Project(models.Model):
+    summary = models.CharField(max_length=60, verbose_name='Название')
+    description = models.CharField(max_length=400, null=True, blank=True, verbose_name='Описание')
+    create_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+    update_date = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
+
+    def __str__(self):
+        return self.summary
+
+    class Meta:
+        verbose_name = 'Проект'
+        verbose_name_plural = 'Проекты'
