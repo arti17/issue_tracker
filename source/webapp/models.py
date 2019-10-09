@@ -41,7 +41,7 @@ class Type(models.Model):
 
 class Project(models.Model):
     summary = models.CharField(max_length=60, verbose_name='Название')
-    description = models.CharField(max_length=400, null=True, blank=True, verbose_name='Описание')
+    description = models.TextField(max_length=400, null=True, blank=True, verbose_name='Описание')
     create_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     update_date = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
 
