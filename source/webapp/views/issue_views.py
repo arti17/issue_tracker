@@ -1,8 +1,8 @@
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from webapp.models import Issue
 from webapp.forms import IssueForm
-from django.views.generic import ListView, CreateView, UpdateView
-from .base_views import DetailView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from .base_views import DetailView
 
 
 class IndexView(ListView):
@@ -10,8 +10,7 @@ class IndexView(ListView):
     context_object_name = 'issues'
     model = Issue
     ordering = '-create_date'
-    paginate_by = 2
-    paginate_orphans = 0
+    paginate_by = 5
 
 
 class IssueView(DetailView):
@@ -40,7 +39,6 @@ class IssueUpdateView(UpdateView):
 
 class IssueDeleteView(DeleteView):
     model = Issue
-    confirm_template_name = 'issue/delete_issue.html'
+    template_name = 'issue/delete_issue.html'
     context_object_name = 'issue'
-    success_url = '/'
-    confirm_of_delete = True
+    success_url = reverse_lazy('index')

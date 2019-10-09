@@ -1,9 +1,8 @@
+from django.shortcuts import render
 from django.urls import reverse
-
 from webapp.models import Status
 from webapp.forms import StatusForm
-from django.views.generic import ListView, CreateView, UpdateView
-from .base_views import DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 
 class StatusView(ListView):
@@ -33,8 +32,12 @@ class StatusUpdateView(UpdateView):
 
 class StatusDeleteView(DeleteView):
     model = Status
-    confirm_template_name = 'status/confirm_of_delete_status.html'
-    context_object_name = 'status'
-    template_name = 'status/status_list.html'
-    success_url = '/statuses/'
-    confirm_of_delete = True
+
+    def post(self, request, *args, **kwargs):
+        try:
+            return self.delete(request, *args, **kwargs)
+        except BaseException as error:
+            return render(request, 'status/status_list.html', {'errors': error})
+
+    def get_success_url(self):
+        return reverse('statuses_list')

@@ -1,8 +1,8 @@
+from django.shortcuts import render
 from django.urls import reverse
 from webapp.models import Type
 from webapp.forms import TypeForm
-from django.views.generic import ListView, CreateView, UpdateView
-from .base_views import DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 
 class TypeView(ListView):
@@ -32,8 +32,12 @@ class TypeUpdateView(UpdateView):
 
 class TypeDeleteView(DeleteView):
     model = Type
-    confirm_template_name = 'type/confirm_of_delete_type.html'
-    context_object_name = 'type'
-    template_name = 'type/types_list.html'
-    success_url = '/types/'
-    confirm_of_delete = False
+
+    def post(self, request, *args, **kwargs):
+        try:
+            return self.delete(request, *args, **kwargs)
+        except BaseException as error:
+            return render(request, 'type/types_list.html', {'errors': error})
+
+    def get_success_url(self):
+        return reverse('types_list')
