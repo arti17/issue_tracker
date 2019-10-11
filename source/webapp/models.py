@@ -1,5 +1,12 @@
 from django.db import models
 
+PROJECT_STATUS_ACTIVE = 'active'
+PROJECT_STATUS_BLOCKED = 'blocked'
+PROJECT_STATUS_CHOICES = (
+    (PROJECT_STATUS_ACTIVE, 'Активен'),
+    (PROJECT_STATUS_BLOCKED, 'Заблокирован')
+)
+
 
 class Issue(models.Model):
     summary = models.CharField(max_length=60, verbose_name='Краткое описание')
@@ -44,6 +51,7 @@ class Project(models.Model):
     description = models.TextField(max_length=400, null=True, blank=True, verbose_name='Описание')
     create_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     update_date = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
+    status = models.CharField(max_length=20, choices=PROJECT_STATUS_CHOICES, default=PROJECT_STATUS_ACTIVE, verbose_name='Статус')
 
     def __str__(self):
         return self.summary
