@@ -3,6 +3,10 @@ from webapp.models import Issue, Status, Type, Project
 
 
 class IssueForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['project'].queryset = Project.objects.all().filter(status__icontains='active')
+
     class Meta:
         model = Issue
         exclude = ['create_date']

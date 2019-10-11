@@ -26,6 +26,8 @@
         </div>
 
     </div>
+    {% if project.status == 'active' %}
     <a href="{% url 'create_project_issue' project.pk %}" class="btn btn-success mt-3 col-4 offset-4">Создать задачу для проекта</a>
+    {% endif %}
     <a href="{% url 'projects_list' %}" class="btn btn-primary mt-3 col-4 offset-4">Назад</a>
 {% endblock %}

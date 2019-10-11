@@ -4,29 +4,34 @@
 
 {% block body %}
     <h3 class="text-center">Проекты</h3>
-    {% if errors %}
-        <div class="alert alert-danger" role="alert">
-            <span class="text-center">Невозможно удалить проект, так как есть связанные с ним задачи.</span>
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-active-projects" data-toggle="tab" href="#nav-active" role="tab"
+               aria-controls="nav-home" aria-selected="true">Активные проекты <span
+                    class="badge badge-primary badge-pill">{{ active_projects|length }}</span></a>
+            <a class="nav-item nav-link" id="nav-blocked-projects" data-toggle="tab" href="#nav-blocked" role="tab"
+               aria-controls="nav-profile" aria-selected="false">Закрытые проекты <span
+                    class="badge badge-primary badge-pill">{{ blocked_projects|length }}</span></a>
         </div>
-        <a href="{% url 'index' %}" class="btn btn-secondary mt-3 col-4 offset-4">Перейти к задачам</a>
-        <a href="{% url 'projects_list' %}" class="btn btn-primary mt-3 col-4 offset-4">Перейти к проектам</a>
-    {% endif %}
-    <ul class="list-group">
-        {% for project in projects %}
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <a href="{% url 'project_detail' project.pk %}">{{ project }}</a>
-                <span class="badge badge-pill bg-light">
-                    <a href="{% url 'update_project' project.pk %}" class="btn text-primary">Редактировать</a>
-                    <form action="{% url 'delete_project' project.pk %}" method="POST">
-                        {% csrf_token %}
-                        <button type="submit" class="btn text-danger">Удалить</button>
-                    </form>
-                </span>
-            </li>
-        {% endfor %}
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-active" role="tabpanel" aria-labelledby="nav-active-projects">
+            <ul class="list-group">
+                {% for project in active_projects %}
+                    {% include 'partial/project_list_partial.html' %}
+                {% endfor %}
+            </ul>
+        </div>
 
-        <form action="{% url 'create_project' %}">
-            <button type="submit" class="btn btn-success mt-3 col-4 offset-4">Добавить проект</button>
-        </form>
-    </ul>
+        <div class="tab-pane fade" id="nav-blocked" role="tabpanel" aria-labelledby="nav-blocked-projects">
+            <ul class="list-group">
+                {% for project in blocked_projects %}
+                    {% include 'partial/project_list_partial.html' %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <form action="{% url 'create_project' %}">
+        <button type="submit" class="btn btn-success mt-3 col-4 offset-4">Добавить проект</button>
+    </form>
 {% endblock %}

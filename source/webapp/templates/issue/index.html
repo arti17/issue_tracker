@@ -24,9 +24,11 @@
                 <td class="align-middle text-center">{{ issue.create_date|date:"d.m.Y H:i:s" }}</td>
                 <td class="align-middle">
                     <div class="btn-group-vertical" role="group">
-                        <a href="{% url 'issue_detail' issue.pk %}" class="btn btn-primary">Просмотр</a>
-                        <a href="{% url 'update_issue' issue.pk %}" class="btn btn-success">Редактировать</a>
-                        <a href="{% url 'delete_issue' issue.pk %}" class="btn btn-danger">Удалить</a>
+                        {% if issue.project.status == 'active' %}
+                            <a href="{% url 'issue_detail' issue.pk %}" class="btn btn-primary">Просмотр</a>
+                            <a href="{% url 'update_issue' issue.pk %}" class="btn btn-success">Редактировать</a>
+                            <a href="{% url 'delete_issue' issue.pk %}" class="btn btn-danger">Удалить</a>
+                        {% endif %}
                     </div>
                 </td>
             </tr>

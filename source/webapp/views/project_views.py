@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 
 from webapp.forms import ProjectForm, IssueProjectForm
-from webapp.models import Project
+from webapp.models import Project, PROJECT_STATUS_BLOCKED, PROJECT_STATUS_ACTIVE
 
 
 class ProjectView(ListView):
@@ -12,7 +12,8 @@ class ProjectView(ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['projects'] = Project.objects.order_by('create_date')
+        context['active_projects'] = Project.objects.filter(status=PROJECT_STATUS_ACTIVE).order_by('create_date')
+        context['blocked_projects'] = Project.objects.filter(status=PROJECT_STATUS_BLOCKED).order_by('create_date')
         return context
 
 
@@ -51,10 +52,11 @@ class ProjectDeleteView(DeleteView):
     model = Project
 
     def post(self, request, *args, **kwargs):
-        try:
-            return self.delete(request, *args, **kwargs)
-        except BaseException as error:
-            return render(request, 'project/project_list.html', {'errors': error})
+        project_pk = kwargs.get('pk')
+        project = Project.objects.get(pk=project_pk)
+        project.status = PROJECT_STATUS_BLOCKED
+        project.save()
+        return redirect('projects_list')
 
     def get_success_url(self):
         return reverse('projects_list')
