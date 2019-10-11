@@ -1,13 +1,24 @@
-<div class="list-group">
-    <a href="" class="list-group-item list-group-item-action">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">{{ issue.summary }}</h5>
-            <small class="text-primary">{{ issue.status }}</small>
-        </div>
-        <hr>
-        <p class="mb-1"><b>Описание:</b> {{ issue.description|linebreaks }}</p>
-        <hr>
-        <small class="text-muted">Тип: <b class="text-primary">{{ issue.type }}</b></small><br>
-        <small class="text-muted">Дата создания: <b class="text-primary">{{ issue.create_date|date:'d.m.Y H:i:s' }}</b></small>
-    </a>
+<div class="alert alert-secondary">
+    <div class="alert alert-success">
+        <h5 class="mb-3">Задача: <span class="text-primary">{{ issue.summary }}</span></h5>
+        <p class="mb-1"><b>Описание:</b> <span class="text-primary">{{ issue.description|linebreaks }}</span></p>
+    </div>
+    <table class="table table-borderless table-sm alert alert-info text-center">
+        <thead>
+        <tr>
+            <th scope="col" class="pl-3">Дата создания</th>
+            <th scope="col">Тип:</th>
+            <th scope="col">Проект:</th>
+            <th scope="col">Статус:</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="text-primary">{{ issue.create_date|date:'d.m.Y H:i:s' }}</td>
+            <td class="text-primary">{{ issue.type }}</td>
+            <td class="text-primary"><a href="{% url 'project_detail' issue.project.pk %}">{{ issue.project }}</a></td>
+            <td class="text-primary">{{ issue.status }}</td>
+        </tr>
+        </tbody>
+    </table>
 </div>

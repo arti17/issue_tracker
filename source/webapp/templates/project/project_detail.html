@@ -3,31 +3,43 @@
 {% block title %}{{ project.summary }}{% endblock %}
 
 {% block body %}
-    <div class="list-group">
-        <a href="" class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">Проект: <span class="text-primary">{{ project.summary }}</span></h5>
-            </div>
-            <hr>
+    <div class="alert alert-secondary">
+        <div class="alert alert-success">
+            <h5 class="mb-3">Проект: <span class="text-primary">{{ project.summary }}</span></h5>
             <p class="mb-1">Описание: <span class="text-primary">{{ project.description }}</span></p>
-            <hr>
-            <small class="text-muted">Дата создания: <b class="text-primary">{{ project.create_date|date:'d.m.Y H:i:s' }}</b></small>
-            <br>
-            <small class="text-muted">Дата редактирования: <b class="text-primary">{{ project.update_date|date:'d.m.Y H:i:s' }}</b></small>
-        </a>
+        </div>
+
+
+        <table class="table table-borderless table-sm alert alert-info text-center">
+            <thead>
+            <tr>
+                <th scope="col" class="pl-3">Дата создания</th>
+                <th scope="col">Дата редактирования</th>
+                <th scope="col">Статус проекта</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="text-primary">{{ project.create_date|date:'d.m.Y H:i:s' }}</td>
+                <td class="text-primary">{{ project.update_date|date:'d.m.Y H:i:s' }}</td>
+                <td class="text-primary">{{ project.get_status_display }}</td>
+            </tr>
+            </tbody>
+        </table>
 
         <div class="alert alert-primary">
             <div class="d-flex w-100 justify-content-between">
-                <h6 class="mb-1">Задачи проекта:</h6>
+                <h5 class="mb-1">Задачи проекта:</h5>
             </div>
             {% for issue in issues %}
                 <p class="mb-1"><a href="{% url 'issue_detail' issue.pk %}">{{ issue }}</a></p>
             {% endfor %}
         </div>
-
     </div>
+
     {% if project.status == 'active' %}
-    <a href="{% url 'create_project_issue' project.pk %}" class="btn btn-success mt-3 col-4 offset-4">Создать задачу для проекта</a>
+        <a href="{% url 'create_project_issue' project.pk %}" class="btn btn-success mt-3 col-4 offset-4">Создать задачу
+            для проекта</a>
     {% endif %}
-    <a href="{% url 'projects_list' %}" class="btn btn-primary mt-3 col-4 offset-4">Назад</a>
+    <button onclick="history.back();" class="btn btn-primary mt-3 col-4 offset-4">Назад</button>
 {% endblock %}

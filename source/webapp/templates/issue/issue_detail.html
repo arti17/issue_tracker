@@ -5,5 +5,12 @@
 {% block body %}
     {% include 'partial/single_issue_display.html' %}
 
-    <button onclick="history.back();" class="btn btn-primary mt-3 col-4 offset-4">Назад</button>
+    <div class="text-center">
+        {% if issue.project.status == 'active' %}
+            <a href="{% url 'update_issue' issue.pk %}" class="btn btn-success mt-3 col-2">Редактировать</a>
+            <a href="{% url 'delete_issue' issue.pk %}" class="btn btn-danger mt-3 col-2">Удалить</a>
+        {% endif %}
+        <button onclick="history.back();" class="btn btn-primary mt-3 col-2">Назад</button>
+    </div>
 {% endblock %}
+

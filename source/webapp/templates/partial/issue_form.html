@@ -6,14 +6,14 @@
 {% endfor %}
 
 {% for field in form %}
-    <p><label for="{{ field.id_for_label }}">{{ field.label }}</label></p>
-    <p>{{ field|add_class:'form-control' }}</p>
+    <p class="ml-3 mb-0"><label for="{{ field.id_for_label }}">{{ field.label }}</label></p>
+    <p class="col-6 ml-0 d-inline-block">{{ field|add_class:'form-control' }}</p>
     {% for error in field.errors %}
-        <p class="text-danger">{{ error }}</p>
+        <small class="text-danger ml-3">{{ error }}</small>
     {% endfor %}
 {% endfor %}
 
-<p>
+<p class="ml-3">
     <input type="submit" value="{{ button_text }}" class="btn btn-success">
     <a href="{% url 'index' %}" class="btn btn-primary">Отмена</a>
 </p>

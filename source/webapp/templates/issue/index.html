@@ -11,25 +11,20 @@
             <th scope="col" class="align-middle text-center">Статус</th>
             <th scope="col" class="align-middle text-center">Тип</th>
             <th scope="col" class="align-middle text-center">Дата создания</th>
-            <th scope="col" class="align-middle text-center">Действия</th>
+            <th scope="col" class="align-middle text-center">Проект</th>
         </tr>
         </thead>
         <tbody>
         {% for issue in issues %}
             <tr>
-                <th scope="row"><a href="{% url 'issue_detail' issue.pk %}">{{ issue.summary }}</a></th>
+                <th scope="row"><a href="{% url 'issue_detail' issue.pk %}" class="text-info">{{ issue.summary }}</a>
+                </th>
                 <td>{{ issue.description|linebreaks }}</td>
                 <td class="align-middle text-center">{{ issue.status }}</td>
                 <td class="align-middle text-center">{{ issue.type }}</td>
                 <td class="align-middle text-center">{{ issue.create_date|date:"d.m.Y H:i:s" }}</td>
                 <td class="align-middle">
-                    <div class="btn-group-vertical" role="group">
-                        {% if issue.project.status == 'active' %}
-                            <a href="{% url 'issue_detail' issue.pk %}" class="btn btn-primary">Просмотр</a>
-                            <a href="{% url 'update_issue' issue.pk %}" class="btn btn-success">Редактировать</a>
-                            <a href="{% url 'delete_issue' issue.pk %}" class="btn btn-danger">Удалить</a>
-                        {% endif %}
-                    </div>
+                    <a href="{% url 'project_detail' issue.project.pk %}" class="text-info">{{ issue.project }}</a>
                 </td>
             </tr>
         {% endfor %}
