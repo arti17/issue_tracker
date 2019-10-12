@@ -34,3 +34,7 @@ class IssueProjectForm(forms.ModelForm):
     class Meta:
         model = Issue
         exclude = ['create_date', 'project']
+
+
+class SimpleSearchForm(forms.Form):
+    search = forms.CharField(max_length=60, required=False, label='Поиск')

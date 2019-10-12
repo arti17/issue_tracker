@@ -1,0 +1,10 @@
+{% load widget_tweaks %}
+
+<form class="form-inline mb-3" action="" method="GET">
+    <label for="{{ form.search.id_for_label }}" class="mr-2">{{ form.search.label }}:</label>
+    {{ form.search|add_class:'form-control' }}
+    <input type="submit" value="Найти" class="btn btn-success">
+    {% for error in form.search.errors %}
+        <p class="form-error">{{ error }}</p>
+    {% endfor %}
+</form>
