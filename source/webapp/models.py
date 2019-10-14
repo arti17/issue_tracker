@@ -14,6 +14,7 @@ class Issue(models.Model):
     status = models.ForeignKey('webapp.Status', related_name='issues', on_delete=models.PROTECT, verbose_name='Статус')
     type = models.ForeignKey('webapp.Type', related_name='issues', on_delete=models.PROTECT, verbose_name='Тип')
     create_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+    update_date = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
     project = models.ForeignKey('webapp.Project', related_name='issues', on_delete=models.PROTECT, verbose_name='Проект')
 
     def __str__(self):
