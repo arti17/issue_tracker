@@ -1,0 +1,10 @@
+# Типы задач, встречающиеся в указанном проекте.
+Type.objects.filter(issues__project__summary__icontains='закр').values('name').distinct()
+
+
+# Проекты, в которых присутствует задача с указанным словом в описании.
+Project.objects.filter(issues__description__icontains='задач')
+
+
+# Задачи, закрытые за последний месяц.
+Issue.objects.filter(update_date__range=(datetime.now() - timedelta(days=30), datetime.now()), status=Status.objects.get(name='Выполнена').pk)
