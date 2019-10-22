@@ -12,18 +12,28 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'index' %}">Трекер задач</a>
+            <a class="navbar-brand" href="{% url 'webapp:index' %}">Трекер задач</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                     aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="{% url 'index' %}">На главную</a>
-                    <a class="nav-item nav-link" href="{% url 'create_issue' %}">Создать задачу</a>
-                    <a class="nav-item nav-link" href="{% url 'statuses_list' %}">Статусы задач</a>
-                    <a class="nav-item nav-link" href="{% url 'types_list' %}">Типы задач</a>
-                    <a class="nav-item nav-link" href="{% url 'projects_list' %}">Проекты</a>
+                    <a class="nav-item nav-link" href="{% url 'webapp:index' %}">На главную</a>
+                    {% if user.is_authenticated %}
+                        <a class="nav-item nav-link" href="{% url 'webapp:create_issue' %}">Создать задачу</a>
+                    {% endif %}
+                    <a class="nav-item nav-link" href="{% url 'webapp:statuses_list' %}">Статусы задач</a>
+                    <a class="nav-item nav-link" href="{% url 'webapp:types_list' %}">Типы задач</a>
+                    <a class="nav-item nav-link" href="{% url 'webapp:projects_list' %}">Проекты</a>
+                </div>
+                <div class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                        <a class="nav-item nav-link"> (Привет, {{ user.first_name }})</a>
+                        <a class="nav-item nav-link" href="{% url 'accounts:logout' %}">Выйти</a>
+                    {% else %}
+                        <a class="nav-item nav-link" href="{% url 'accounts:login' %}">Войти</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

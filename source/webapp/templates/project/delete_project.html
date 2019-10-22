@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <form action="{% url 'delete_project' project.pk %}" method="POST">
+    <form action="{% url 'webapp:delete_project' project.pk %}" method="POST">
         {% include 'partial/confirm_of_delete.html' with url="/projects/" %}
     </form>
 {% endblock %}

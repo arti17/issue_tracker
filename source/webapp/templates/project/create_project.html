@@ -4,7 +4,7 @@
 
 {% block body %}
     <h3 class="text-center">Добавить проект</h3>
-    <form action="{% url 'create_project' %}" method="POST">
+    <form action="{% url 'webapp:create_project' %}" method="POST">
         {% include 'partial/project_form.html' with button_text='Добавить' %}
     </form>
 {% endblock %}

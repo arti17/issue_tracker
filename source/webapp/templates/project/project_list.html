@@ -34,7 +34,10 @@
             </ul>
         </div>
     </div>
-    <form action="{% url 'create_project' %}">
+    {% if user.is_authenticated %}
+    <form action="{% url 'webapp:create_project' %}">
         <button type="submit" class="btn btn-success mt-3 col-4 offset-4">Добавить проект</button>
     </form>
+    {% endif %}
+
 {% endblock %}

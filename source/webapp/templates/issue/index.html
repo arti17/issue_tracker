@@ -20,14 +20,14 @@
         <tbody>
         {% for issue in issues %}
             <tr>
-                <th scope="row"><a href="{% url 'issue_detail' issue.pk %}" class="text-info">{{ issue.summary }}</a>
+                <th scope="row"><a href="{% url 'webapp:issue_detail' issue.pk %}" class="text-info">{{ issue.summary }}</a>
                 </th>
                 <td>{{ issue.description|linebreaks }}</td>
                 <td class="align-middle text-center">{{ issue.status }}</td>
                 <td class="align-middle text-center">{{ issue.type }}</td>
                 <td class="align-middle text-center">{{ issue.create_date|date:"d.m.Y H:i:s" }}</td>
                 <td class="align-middle">
-                    <a href="{% url 'project_detail' issue.project.pk %}" class="text-info">{{ issue.project }}</a>
+                    <a href="{% url 'webapp:project_detail' issue.project.pk %}" class="text-info">{{ issue.project }}</a>
                 </td>
             </tr>
         {% endfor %}

@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
@@ -51,16 +52,16 @@ class IssueView(DetailView):
     context_key = 'issue'
 
 
-class IssueCreateView(CreateView):
+class IssueCreateView(LoginRequiredMixin, CreateView):
     template_name = 'issue/create_issue.html'
     model = Issue
     form_class = IssueForm
 
     def get_success_url(self):
-        return reverse('index')
+        return reverse('webapp:index')
 
 
-class IssueUpdateView(UpdateView):
+class IssueUpdateView(LoginRequiredMixin, UpdateView):
     model = Issue
     class_form = IssueForm
     template_name = 'issue/update_issue.html'
@@ -79,9 +80,9 @@ class IssueUpdateView(UpdateView):
         return get_object_or_404(self.model, pk=issue_pk)
 
 
-class IssueDeleteView(DeleteView):
+class IssueDeleteView(LoginRequiredMixin, DeleteView):
     model = Issue
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('webapp:index')
 
     def get(self, request, *args, **kwargs):
         issue = self.get_object()

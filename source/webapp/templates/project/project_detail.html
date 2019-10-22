@@ -32,13 +32,13 @@
                 <h5 class="mb-1">Задачи проекта:</h5>
             </div>
             {% for issue in issues %}
-                <p class="mb-1"><a href="{% url 'issue_detail' issue.pk %}">{{ issue }}</a></p>
+                <p class="mb-1"><a href="{% url 'webapp:issue_detail' issue.pk %}">{{ issue }}</a></p>
             {% endfor %}
         </div>
     </div>
 
-    {% if project.status == 'active' %}
-        <a href="{% url 'create_project_issue' project.pk %}" class="btn btn-success mt-3 col-4 offset-4">Создать задачу
+    {% if project.status == 'active' and user.is_authenticated %}
+        <a href="{% url 'webapp:create_project_issue' project.pk %}" class="btn btn-success mt-3 col-4 offset-4">Создать задачу
             для проекта</a>
     {% endif %}
     <button onclick="history.back();" class="btn btn-primary mt-3 col-4 offset-4">Назад</button>

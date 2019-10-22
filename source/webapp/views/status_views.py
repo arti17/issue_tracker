@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse
 from webapp.models import Status
@@ -12,16 +13,16 @@ class StatusView(ListView):
     ordering = 'name'
 
 
-class StatusCreateView(CreateView):
+class StatusCreateView(LoginRequiredMixin, CreateView):
     template_name = 'status/create_status.html'
     model = Status
     form_class = StatusForm
 
     def get_success_url(self):
-        return reverse('statuses_list')
+        return reverse('webapp:statuses_list')
 
 
-class StatusUpdateView(UpdateView):
+class StatusUpdateView(LoginRequiredMixin, UpdateView):
     model = Status
     class_form = StatusForm
     template_name = 'status/update_status.html'
@@ -30,14 +31,14 @@ class StatusUpdateView(UpdateView):
     fields = ['name']
 
 
-class StatusDeleteView(DeleteView):
+class StatusDeleteView(LoginRequiredMixin, DeleteView):
     model = Status
 
-    def post(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         try:
             return self.delete(request, *args, **kwargs)
         except BaseException as error:
             return render(request, 'status/status_list.html', {'errors': error})
 
     def get_success_url(self):
-        return reverse('statuses_list')
+        return reverse('webapp:statuses_list')

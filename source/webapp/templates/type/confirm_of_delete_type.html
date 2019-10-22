@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <form action="{% url 'delete_type' type.pk %}" method="POST">
+    <form action="{% url 'webapp:delete_type' type.pk %}" method="POST">
         {% include 'partial/confirm_of_delete.html' with url="/types/" %}
     </form>
 {% endblock %}

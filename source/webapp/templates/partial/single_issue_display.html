@@ -16,7 +16,7 @@
         <tr>
             <td class="text-primary">{{ issue.create_date|date:'d.m.Y H:i:s' }}</td>
             <td class="text-primary">{{ issue.type }}</td>
-            <td class="text-primary"><a href="{% url 'project_detail' issue.project.pk %}">{{ issue.project }}</a></td>
+            <td class="text-primary"><a href="{% url 'webapp:project_detail' issue.project.pk %}">{{ issue.project }}</a></td>
             <td class="text-primary">{{ issue.status }}</td>
         </tr>
         </tbody>

@@ -8,26 +8,31 @@
         <div class="alert alert-danger" role="alert">
             <span class="text-center">Невозможно удалить тип, так как есть связанные задачи.</span>
         </div>
-        <a href="{% url 'index' %}" class="btn btn-secondary mt-3 col-4 offset-4">Перейти к задачам</a>
-        <a href="{% url 'types_list' %}" class="btn btn-primary mt-3 col-4 offset-4">Перейти к типам задач</a>
+        <a href="{% url 'webapp:index' %}" class="btn btn-secondary mt-3 col-4 offset-4">Перейти к задачам</a>
+        <a href="{% url 'webapp:types_list' %}" class="btn btn-primary mt-3 col-4 offset-4">Перейти к типам задач</a>
     {% endif %}
     <ul class="list-group">
         {% for type in types %}
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 {{ type }}
-                <span class="badge badge-pill bg-light">
-                    <a href="{% url 'update_type' type.pk %}" class="btn text-info">Редактировать</a>
-                    <form action="{% url 'delete_type' type.pk %}" method="POST" class="d-inline-block">
-                        {% csrf_token %}
-                        <button type="submit" class="btn text-danger">Удалить</button>
-                    </form>
-                </span>
+
+                {% if user.is_authenticated %}
+                    <span class="badge badge-pill bg-light">
+                        <a href="{% url 'webapp:update_type' type.pk %}" class="btn text-info">Редактировать</a>
+                        <form action="{% url 'webapp:delete_type' type.pk %}" method="GET" class="d-inline-block">
+                            {% csrf_token %}
+                            <button type="submit" class="btn text-danger">Удалить</button>
+                        </form>
+                    </span>
+                {% endif %}
             </li>
         {% endfor %}
+        {% if user.is_authenticated %}
+            <form action="{% url 'webapp:create_type' %}">
+                <button type="submit" class="btn btn-success mt-3 col-4 offset-4">Добавить тип задачи</button>
+            </form>
+        {% endif %}
 
-        <form action="{% url 'create_type' %}">
-            <button type="submit" class="btn btn-success mt-3 col-4 offset-4">Добавить тип задачи</button>
-        </form>
     </ul>
 
 {% endblock %}

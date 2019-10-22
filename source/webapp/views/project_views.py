@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
@@ -46,16 +47,16 @@ class ProjectDetailView(DetailView):
         return context
 
 
-class ProjectCreateView(CreateView):
+class ProjectCreateView(LoginRequiredMixin, CreateView):
     template_name = 'project/create_project.html'
     model = Project
     form_class = ProjectForm
 
     def get_success_url(self):
-        return reverse('projects_list')
+        return reverse('webapp:projects_list')
 
 
-class ProjectCreateIssueView(CreateView):
+class ProjectCreateIssueView(LoginRequiredMixin, CreateView):
     template_name = 'issue/create_issue.html'
     form_class = IssueProjectForm
 
@@ -63,24 +64,24 @@ class ProjectCreateIssueView(CreateView):
         project_pk = self.kwargs.get('pk')
         project = get_object_or_404(Project, pk=project_pk)
         project.issues.create(**form.cleaned_data)
-        return redirect('project_detail', pk=project_pk)
+        return redirect('webapp:project_detail', pk=project_pk)
 
 
-class ProjectDeleteView(DeleteView):
+class ProjectDeleteView(LoginRequiredMixin, DeleteView):
     model = Project
 
-    def post(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         project_pk = kwargs.get('pk')
         project = Project.objects.get(pk=project_pk)
         project.status = PROJECT_STATUS_BLOCKED
         project.save()
-        return redirect('projects_list')
+        return redirect('webapp:projects_list')
 
     def get_success_url(self):
-        return reverse('projects_list')
+        return reverse('webapp:projects_list')
 
 
-class ProjectUpdateView(UpdateView):
+class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     model = Project
     class_form = ProjectForm
     template_name = 'project/update_project.html'

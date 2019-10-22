@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse
 from webapp.models import Type
@@ -12,16 +13,16 @@ class TypeView(ListView):
     ordering = 'name'
 
 
-class TypeCreateView(CreateView):
+class TypeCreateView(LoginRequiredMixin, CreateView):
     template_name = 'type/create_type.html'
     model = Type
     form_class = TypeForm
 
     def get_success_url(self):
-        return reverse('types_list')
+        return reverse('webapp:types_list')
 
 
-class TypeUpdateView(UpdateView):
+class TypeUpdateView(LoginRequiredMixin, UpdateView):
     model = Type
     class_form = TypeForm
     template_name = 'type/update_type.html'
@@ -30,14 +31,14 @@ class TypeUpdateView(UpdateView):
     fields = ['name']
 
 
-class TypeDeleteView(DeleteView):
+class TypeDeleteView(LoginRequiredMixin, DeleteView):
     model = Type
 
-    def post(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         try:
             return self.delete(request, *args, **kwargs)
         except BaseException as error:
             return render(request, 'type/types_list.html', {'errors': error})
 
     def get_success_url(self):
-        return reverse('types_list')
+        return reverse('webapp:types_list')

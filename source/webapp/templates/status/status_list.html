@@ -8,25 +8,28 @@
         <div class="alert alert-danger" role="alert">
             <span class="text-center">Невозможно удалить статус, так как есть связанные с ним задачи.</span>
         </div>
-        <a href="{% url 'index' %}" class="btn btn-secondary mt-3 col-4 offset-4">Перейти к задачам</a>
-        <a href="{% url 'statuses_list' %}" class="btn btn-primary mt-3 col-4 offset-4">Перейти к статусам</a>
+        <a href="{% url 'webapp:index' %}" class="btn btn-secondary mt-3 col-4 offset-4">Перейти к задачам</a>
+        <a href="{% url 'webapp:statuses_list' %}" class="btn btn-primary mt-3 col-4 offset-4">Перейти к статусам</a>
     {% endif %}
     <ul class="list-group">
         {% for status in statuses %}
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 {{ status }}
-                <span class="badge badge-pill bg-light">
-                    <a href="{% url 'update_status' status.pk %}" class="btn text-info">Редактировать</a>
-                    <form action="{% url 'delete_status' status.pk %}" method="POST" class="d-inline-block">
+                {% if user.is_authenticated %}
+                    <span class="badge badge-pill bg-light">
+                    <a href="{% url 'webapp:update_status' status.pk %}" class="btn text-info">Редактировать</a>
+                    <form action="{% url 'webapp:delete_status' status.pk %}" method="GET" class="d-inline-block">
                         {% csrf_token %}
                         <button type="submit" class="btn text-danger">Удалить</button>
                     </form>
                 </span>
+                {% endif %}
             </li>
         {% endfor %}
-
-        <form action="{% url 'create_status' %}">
-            <button type="submit" class="btn btn-success mt-3 col-4 offset-4">Добавить статус</button>
-        </form>
+        {% if user.is_authenticated %}
+            <form action="{% url 'webapp:create_status' %}">
+                <button type="submit" class="btn btn-success mt-3 col-4 offset-4">Добавить статус</button>
+            </form>
+        {% endif %}
     </ul>
 {% endblock %}
