@@ -26,6 +26,7 @@
                     <a class="nav-item nav-link" href="{% url 'webapp:statuses_list' %}">Статусы задач</a>
                     <a class="nav-item nav-link" href="{% url 'webapp:types_list' %}">Типы задач</a>
                     <a class="nav-item nav-link" href="{% url 'webapp:projects_list' %}">Проекты</a>
+                    <a class="nav-item nav-link" href="{% url 'accounts:users_list' %}">Пользователи</a>
                 </div>
                 <div class="navbar-nav ml-auto">
                     {% if user.is_authenticated %}

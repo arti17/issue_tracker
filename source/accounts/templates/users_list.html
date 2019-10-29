@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Пользователи{% endblock %}
+
+{% block body %}
+    <h3 class="text-center">Пользователи</h3>
+    <ul class="list-group">
+        {% for person in persons %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {% if person.pk == user.pk %}
+                    <span class="text-danger">{{ person }}</span>
+                    {% else %}
+                    {{ person }}
+                {% endif %}
+                    <span class="badge badge-pill bg-light">
+                    <a href="{% url 'accounts:user_detail' person.pk %}" class="btn text-info">Просмотр</a>
+                </span>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
