@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ user_obj }}
+{% endblock %}
+
+{% block body %}
+    <h1>Личный кабинет</h1>
+    <p>Имя пользователя: <b>{{ user_obj.username }}</b></p>
+    <p>Имя: <b>{{ user_obj.first_name }}</b></p>
+    <p>Фамилия: <b>{{ user_obj.last_name }}</b></p>
+    <p>Почта: <b>{{ user_obj.email }}</b></p>
+
+    {% if user.pk == user_obj.pk %}
+        <a href="{% url 'accounts:user_update_info' user_obj.pk %}" class="btn btn-primary">Редактировать</a>
+        <a href="{% url 'accounts:user_change_password' user_obj.pk %}" class="btn btn-secondary">Сменить пароль</a>
+    {% endif %}
+
+{% endblock %}
