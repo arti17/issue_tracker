@@ -10,6 +10,8 @@
     <p>Имя: <b>{{ user_obj.first_name }}</b></p>
     <p>Фамилия: <b>{{ user_obj.last_name }}</b></p>
     <p>Почта: <b>{{ user_obj.email }}</b></p>
+    <p>Дата регистрации: <b>{{ user_obj.date_joined }}</b></p>
+    <p>Последний вход: <b>{{ user_obj.last_login }}</b></p>
 
     {% if user.pk == user_obj.pk %}
         <a href="{% url 'accounts:user_update_info' user_obj.pk %}" class="btn btn-primary">Редактировать</a>
