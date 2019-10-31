@@ -220,16 +220,52 @@
   "model": "auth.user",
   "pk": 1,
   "fields": {
-    "password": "pbkdf2_sha256$150000$b8vS9kvkG7b4$3WQXn8qGvCfQEOMtF1Hc9yiDwZmJdpFZTtK+WnCYLEY=",
-    "last_login": "2019-10-09T09:14:23.377Z",
+    "password": "pbkdf2_sha256$150000$NehdCNWFvQf9$igDoB2N6WrWYTGevLmvqXHU/U2Jrr39hcpFmcPhcsJM=",
+    "last_login": "2019-10-31T12:57:41.303Z",
     "is_superuser": true,
     "username": "admin",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
+    "first_name": "\u0410\u0434\u043c\u0438\u043d",
+    "last_name": "\u0410\u0434\u043c\u0438\u043d\u043e\u0432",
+    "email": "admin@admin.com",
     "is_staff": true,
     "is_active": true,
-    "date_joined": "2019-10-09T09:14:18.563Z",
+    "date_joined": "2019-10-09T09:14:18Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$srNS8RB9QSK9$IGi6zTihsNNIvWaRk0EymfoSkRgH9zde8xv1gW8MWUk=",
+    "last_login": "2019-10-31T14:12:37.037Z",
+    "is_superuser": false,
+    "username": "artem",
+    "first_name": "\u0410\u0440\u0442\u0435\u043c",
+    "last_name": "\u0422\u043a\u0430\u0447\u0443\u043a",
+    "email": "artem.tkachuk@pay24.asia",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2019-10-31T14:11:32.595Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$EHfi2ZK3dCOB$LlTZEq6WAU1E1V8CpCi8EsM3K11wKg2XMWvpUiduzik=",
+    "last_login": "2019-10-31T14:12:20.809Z",
+    "is_superuser": false,
+    "username": "user",
+    "first_name": "\u041f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c",
+    "last_name": "\u042e\u0437\u0435\u0440\u043e\u0432",
+    "email": "user@user.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2019-10-31T14:12:20.555Z",
     "groups": [],
     "user_permissions": []
   }
