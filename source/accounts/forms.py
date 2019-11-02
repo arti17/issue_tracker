@@ -1,6 +1,9 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+import requests
+
+from accounts.models import Profile
 
 
 class UserCreationForm(forms.Form):
@@ -39,9 +42,44 @@ class UserCreationForm(forms.Form):
 
 
 class UserChangeForm(forms.ModelForm):
+    avatar = forms.ImageField(required=False, label='Аватар')
+    about_user = forms.CharField(required=False, widget=forms.Textarea, label='О себе')
+    link_to_github = forms.URLField(required=False, label='Ссылка на Github')
+
+    def get_initial_for_field(self, field, field_name):
+        if field_name in self.Meta.profile_fields:
+            return getattr(self.instance.profile, field_name)
+        return super().get_initial_for_field(field, field_name)
+
+    def save(self, commit=True):
+        user = super().save(commit=commit)
+        user.profile = self.save_profile(commit)
+        return user
+
+    def save_profile(self, commit=True):
+        profile, _ = Profile.objects.get_or_create(user=self.instance)
+        for field in self.Meta.profile_fields:
+            setattr(profile, field, self.cleaned_data.get(field))
+        if not profile.avatar:
+            profile.avatar = None
+        if commit:
+            profile.save()
+        return profile
+
+    def clean_link_to_github(self):
+        link_to_github = self.cleaned_data.get('link_to_github')
+        if link_to_github:
+            request = requests.get(link_to_github)
+
+            if not request.status_code == 200 or 'github.com' not in link_to_github:
+                raise ValidationError('Неверная ссылка или такого профиля не существует',
+                                      code='link_to_github_exists')
+        return link_to_github
+
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email']
+        profile_fields = ['about_user', 'link_to_github', 'avatar']
 
 
 class PasswordChangeForm(forms.ModelForm):

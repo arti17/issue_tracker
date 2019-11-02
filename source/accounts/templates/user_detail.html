@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
     {{ user_obj }}
@@ -6,12 +7,30 @@
 
 {% block body %}
     <h1>Личный кабинет</h1>
-    <p>Имя пользователя: <b>{{ user_obj.username }}</b></p>
-    <p>Имя: <b>{{ user_obj.first_name }}</b></p>
-    <p>Фамилия: <b>{{ user_obj.last_name }}</b></p>
-    <p>Почта: <b>{{ user_obj.email }}</b></p>
-    <p>Дата регистрации: <b>{{ user_obj.date_joined }}</b></p>
-    <p>Последний вход: <b>{{ user_obj.last_login }}</b></p>
+    <div class="card mb-3" style="max-width: 640px;">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                {% if user_obj.profile.avatar %}
+                    <img src="{{ user_obj.profile.avatar.url }}" class="card-img" alt="user-foto">
+                {% else %}
+                    <img src="{% static 'images/no_foto.png' %}" class="card-img" alt="user-foto">
+                {% endif %}
+
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Пользователь: {{ user_obj.username }}</h5>
+                    <p>Имя: <b>{{ user_obj.first_name }}</b></p>
+                    <p>Фамилия: <b>{{ user_obj.last_name }}</b></p>
+                    <p>О себе: <b>{{ user_obj.profile.about_user }}</b></p>
+                    <p>Почта: <b>{{ user_obj.email }}</b></p>
+                    <p>Ссылка на github: <a href="{{ user_obj.profile.link_to_github }}" target="_blank">{{ user_obj.profile.link_to_github }}</a></p>
+                    <p>Дата регистрации: <b>{{ user_obj.date_joined }}</b></p>
+                    <p class="card-text"><small class="text-muted">Последний вход {{ user_obj.last_login }}</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     {% if user.pk == user_obj.pk %}
         <a href="{% url 'accounts:user_update_info' user_obj.pk %}" class="btn btn-primary">Редактировать</a>

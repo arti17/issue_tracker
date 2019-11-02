@@ -7,7 +7,7 @@
 {% block body %}
 <h1>Личный кабинет</h1>
     <h4>Редактировать личные данные</h4>
-    <form action="{% url "accounts:user_update_info" user_obj.pk %}" method="post" class="jumbotron">
+    <form action="{% url "accounts:user_update_info" user_obj.pk %}" method="post" class="jumbotron" enctype="multipart/form-data">
         {% include 'partial/issue_form.html' with button_text='Редактировать' %}
     </form>
 {% endblock %}
