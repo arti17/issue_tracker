@@ -7,3 +7,4 @@ uploads
 *.pyc
 *.log
 virtualenv
+uploads
