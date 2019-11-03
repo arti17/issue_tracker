@@ -220,8 +220,8 @@
   "model": "auth.user",
   "pk": 1,
   "fields": {
-    "password": "pbkdf2_sha256$150000$NehdCNWFvQf9$igDoB2N6WrWYTGevLmvqXHU/U2Jrr39hcpFmcPhcsJM=",
-    "last_login": "2019-10-31T12:57:41.303Z",
+    "password": "pbkdf2_sha256$150000$cubTEpIwX2Us$kjOGVuDnnbQlTELs+qDFNjJtUwHVGE7XWCqbG6W6FuI=",
+    "last_login": "2019-11-03T19:15:33.709Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "\u0410\u0434\u043c\u0438\u043d",
@@ -238,8 +238,8 @@
   "model": "auth.user",
   "pk": 2,
   "fields": {
-    "password": "pbkdf2_sha256$150000$srNS8RB9QSK9$IGi6zTihsNNIvWaRk0EymfoSkRgH9zde8xv1gW8MWUk=",
-    "last_login": "2019-10-31T14:12:37.037Z",
+    "password": "pbkdf2_sha256$150000$mYYmY9M7udUD$Qufja9MR25Qi1JiHS1zpADzOq4uaI71WyTGh43S0pW0=",
+    "last_login": "2019-11-03T19:15:47.280Z",
     "is_superuser": false,
     "username": "artem",
     "first_name": "\u0410\u0440\u0442\u0435\u043c",
@@ -257,7 +257,7 @@
   "pk": 3,
   "fields": {
     "password": "pbkdf2_sha256$150000$EHfi2ZK3dCOB$LlTZEq6WAU1E1V8CpCi8EsM3K11wKg2XMWvpUiduzik=",
-    "last_login": "2019-10-31T14:12:20.809Z",
+    "last_login": "2019-11-02T13:03:20.534Z",
     "is_superuser": false,
     "username": "user",
     "first_name": "\u041f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c",
@@ -268,6 +268,144 @@
     "date_joined": "2019-10-31T14:12:20.555Z",
     "groups": [],
     "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$bYFeZdTUmPmF$ZFPIwXFDZn3/Ozhp7G+0SfzkHp5ibFB7OMrm6kruqSw=",
+    "last_login": "2019-11-03T19:19:10.541Z",
+    "is_superuser": false,
+    "username": "test",
+    "first_name": "\u0422\u0435\u0441\u0442",
+    "last_name": "\u0422\u0435\u0441\u0442\u043e\u0432",
+    "email": "test@test.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2019-11-02T12:56:36.477Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "webapp.team",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "project": 1,
+    "start_date": "2019-11-03",
+    "end_date": null
+  }
+},
+{
+  "model": "webapp.team",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "project": 2,
+    "start_date": "2019-10-29",
+    "end_date": null
+  }
+},
+{
+  "model": "webapp.team",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "project": 3,
+    "start_date": "2019-10-30",
+    "end_date": null
+  }
+},
+{
+  "model": "webapp.team",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "project": 5,
+    "start_date": "2019-11-01",
+    "end_date": null
+  }
+},
+{
+  "model": "webapp.team",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "artem"
+    ],
+    "project": 1,
+    "start_date": "2019-11-03",
+    "end_date": null
+  }
+},
+{
+  "model": "webapp.team",
+  "pk": 6,
+  "fields": {
+    "user": [
+      "artem"
+    ],
+    "project": 5,
+    "start_date": "2019-11-01",
+    "end_date": null
+  }
+},
+{
+  "model": "webapp.team",
+  "pk": 7,
+  "fields": {
+    "user": [
+      "user"
+    ],
+    "project": 1,
+    "start_date": "2019-11-03",
+    "end_date": null
+  }
+},
+{
+  "model": "webapp.team",
+  "pk": 8,
+  "fields": {
+    "user": [
+      "user"
+    ],
+    "project": 2,
+    "start_date": "2019-11-01",
+    "end_date": null
+  }
+},
+{
+  "model": "webapp.team",
+  "pk": 9,
+  "fields": {
+    "user": [
+      "user"
+    ],
+    "project": 3,
+    "start_date": "2019-11-02",
+    "end_date": null
+  }
+},
+{
+  "model": "webapp.team",
+  "pk": 10,
+  "fields": {
+    "user": [
+      "user"
+    ],
+    "project": 5,
+    "start_date": "2019-11-03",
+    "end_date": null
   }
 }
 ]
