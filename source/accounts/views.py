@@ -11,7 +11,6 @@ from accounts.models import Profile
 
 def login_view(request):
     context = {}
-    print('GET', request.GET)
     next_page = request.GET.get('next')
     url = request.session.setdefault('url', next_page)
     if request.method == 'POST':

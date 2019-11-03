@@ -1,10 +1,10 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 
 from webapp.forms import ProjectForm, IssueProjectForm, SimpleSearchForm
-from webapp.models import Project, PROJECT_STATUS_BLOCKED, PROJECT_STATUS_ACTIVE
+from webapp.models import Project, PROJECT_STATUS_BLOCKED, PROJECT_STATUS_ACTIVE, Team, Issue
 
 
 class ProjectView(ListView):
@@ -56,9 +56,19 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
         return reverse('webapp:projects_list')
 
 
-class ProjectCreateIssueView(LoginRequiredMixin, CreateView):
+class ProjectCreateIssueView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     template_name = 'issue/create_issue.html'
     form_class = IssueProjectForm
+
+    def test_func(self):
+        issue_pk = self.kwargs.get('pk')
+        issue = Issue.objects.get(pk=issue_pk)
+        project = issue.project
+        teams = Team.objects.filter(project=project)
+        users_id = []
+        for team in teams:
+            users_id.append(team.user.pk)
+        return self.request.user.pk in users_id
 
     def form_valid(self, form):
         project_pk = self.kwargs.get('pk')

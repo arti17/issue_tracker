@@ -1,11 +1,11 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.utils.http import urlencode
 
-from webapp.models import Issue, PROJECT_STATUS_BLOCKED
+from webapp.models import Issue, PROJECT_STATUS_BLOCKED, Team, Project
 from webapp.forms import IssueForm, SimpleSearchForm
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .base_views import DetailView
@@ -57,17 +57,36 @@ class IssueCreateView(LoginRequiredMixin, CreateView):
     model = Issue
     form_class = IssueForm
 
+    def get_form(self, form_class=None):
+        form = super().get_form()
+        username = self.request.user
+        teams = Team.objects.filter(user__username__icontains=username)
+        user_projects = []
+        for team in teams:
+            user_projects.append(team.project)
+        form.fields['project'].queryset = Project.objects.filter(summary__in=user_projects).filter(status='active')
+        return form
+
     def get_success_url(self):
         return reverse('webapp:index')
 
 
-class IssueUpdateView(LoginRequiredMixin, UpdateView):
+class IssueUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Issue
     class_form = IssueForm
     template_name = 'issue/update_issue.html'
     context_object_name = 'issue'
     success_url = '/'
     fields = ['summary', 'description', 'status', 'type', 'project']
+
+    def test_func(self):
+        issue = self.get_object()
+        project = issue.project
+        teams = Team.objects.filter(project=project)
+        users_id = []
+        for team in teams:
+            users_id.append(team.user.pk)
+        return self.request.user.pk in users_id
 
     def get(self, request, *args, **kwargs):
         issue = self.get_object()
@@ -80,7 +99,7 @@ class IssueUpdateView(LoginRequiredMixin, UpdateView):
         return get_object_or_404(self.model, pk=issue_pk)
 
 
-class IssueDeleteView(LoginRequiredMixin, DeleteView):
+class IssueDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Issue
     success_url = reverse_lazy('webapp:index')
 
@@ -89,6 +108,15 @@ class IssueDeleteView(LoginRequiredMixin, DeleteView):
         if issue.project.status == PROJECT_STATUS_BLOCKED:
             raise Http404
         return render(request, 'issue/delete_issue.html', {'issue': issue})
+
+    def test_func(self):
+        issue = self.get_object()
+        project = issue.project
+        teams = Team.objects.filter(project=project)
+        users_id = []
+        for team in teams:
+            users_id.append(team.user.pk)
+        return self.request.user.pk in users_id
 
     def get_object(self):
         issue_pk = self.kwargs.get('pk')
