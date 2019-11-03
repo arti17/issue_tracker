@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 PROJECT_STATUS_ACTIVE = 'active'
@@ -60,3 +61,17 @@ class Project(models.Model):
     class Meta:
         verbose_name = 'Проект'
         verbose_name_plural = 'Проекты'
+
+
+class Team(models.Model):
+    user = models.ForeignKey(User, related_name='teams', on_delete=models.PROTECT, verbose_name='Пользователь')
+    project = models.ForeignKey('webapp.Project', related_name='teams', on_delete=models.PROTECT, verbose_name='Проект')
+    start_date = models.DateField(null=True, blank=True, verbose_name='Дата начала работы ')
+    end_date = models.DateField(null=True, blank=True, verbose_name='Дата окончания работы')
+
+    def __str__(self):
+        return f'{self.user.username} - {self.project.summary}'
+
+    class Meta:
+        verbose_name = 'Команда'
+        verbose_name_plural = 'Команды'
