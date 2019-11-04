@@ -76,7 +76,6 @@ class IssueUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     class_form = IssueForm
     template_name = 'issue/update_issue.html'
     context_object_name = 'issue'
-    success_url = '/'
     fields = ['summary', 'description', 'status', 'type', 'project']
 
     def test_func(self):
@@ -97,6 +96,9 @@ class IssueUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def get_object(self):
         issue_pk = self.kwargs.get('pk')
         return get_object_or_404(self.model, pk=issue_pk)
+
+    def get_success_url(self):
+        return reverse('webapp:index')
 
 
 class IssueDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):

@@ -96,5 +96,7 @@ class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     class_form = ProjectForm
     template_name = 'project/update_project.html'
     context_object_name = 'project'
-    success_url = '/projects/'
     fields = ['summary', 'description']
+
+    def get_success_url(self):
+        return reverse('webapp:projects_list')

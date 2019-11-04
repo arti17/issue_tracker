@@ -27,8 +27,10 @@ class StatusUpdateView(LoginRequiredMixin, UpdateView):
     class_form = StatusForm
     template_name = 'status/update_status.html'
     context_object_name = 'status'
-    success_url = '/statuses/'
     fields = ['name']
+
+    def get_success_url(self):
+        return reverse('webapp:statuses_list')
 
 
 class StatusDeleteView(LoginRequiredMixin, DeleteView):

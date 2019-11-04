@@ -27,8 +27,10 @@ class TypeUpdateView(LoginRequiredMixin, UpdateView):
     class_form = TypeForm
     template_name = 'type/update_type.html'
     context_object_name = 'type'
-    success_url = '/types/'
     fields = ['name']
+
+    def get_success_url(self):
+        return reverse('webapp:types_list')
 
 
 class TypeDeleteView(LoginRequiredMixin, DeleteView):

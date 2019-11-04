@@ -22,9 +22,9 @@
                     <h5 class="card-title">Пользователь: {{ user_obj.username }}</h5>
                     <p>Имя: <b>{{ user_obj.first_name }}</b></p>
                     <p>Фамилия: <b>{{ user_obj.last_name }}</b></p>
-                    <p>О себе: <b>{{ user_obj.profile.about_user }}</b></p>
+                    <p>О себе: <b>{{ user_obj.profile.about_user|default_if_none:'' }}</b></p>
                     <p>Почта: <b>{{ user_obj.email }}</b></p>
-                    <p>Ссылка на github: <a href="{{ user_obj.profile.link_to_github }}" target="_blank">{{ user_obj.profile.link_to_github }}</a></p>
+                    <p>Ссылка на github: <a href="{{ user_obj.profile.link_to_github }}" target="_blank">{{ user_obj.profile.link_to_github|default_if_none:'' }}</a></p>
                     <p>Дата регистрации: <b>{{ user_obj.date_joined }}</b></p>
                     <p class="card-text"><small class="text-muted">Последний вход {{ user_obj.last_login }}</small></p>
                 </div>
