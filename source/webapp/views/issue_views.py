@@ -82,7 +82,7 @@ class IssueUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     class_form = IssueForm
     template_name = 'issue/update_issue.html'
     context_object_name = 'issue'
-    fields = ['summary', 'description', 'status', 'type', 'project']
+    fields = ['summary', 'description', 'status', 'type', 'project', 'assigned_to']
 
     def test_func(self):
         issue = self.get_object()

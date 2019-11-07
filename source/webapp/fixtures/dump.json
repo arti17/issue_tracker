@@ -1,122 +1,5 @@
 [
 {
-  "model": "webapp.issue",
-  "pk": 1,
-  "fields": {
-    "summary": "\u041f\u0430\u0433\u0438\u043d\u0430\u0446\u0438\u044f \u0437\u0430\u0434\u0430\u0447",
-    "description": "\u0420\u0435\u0430\u043b\u0438\u0437\u043e\u0432\u0430\u0442\u044c \u043f\u0430\u0433\u0438\u043d\u0430\u0446\u0438\u044e \u043d\u0430 \u0433\u043b\u0430\u0432\u043d\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435",
-    "status": 3,
-    "type": 3,
-    "create_date": "2019-10-09T09:22:40.299Z",
-    "update_date": "2019-10-14T11:54:08.977Z",
-    "project": 1
-  }
-},
-{
-  "model": "webapp.issue",
-  "pk": 2,
-  "fields": {
-    "summary": "CRUD \u0434\u043b\u044f \u0442\u0438\u043f\u043e\u0432 \u0438 \u0441\u0442\u0430\u0442\u0443\u0441\u043e\u0432",
-    "description": "\u0421\u043e\u0437\u0434\u0430\u0442\u044c \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u044b CRUD \u0434\u043b\u044f \u0442\u0438\u043f\u043e\u0432 \u0438 \u0441\u0442\u0430\u0442\u0443\u0441\u043e\u0432 \u043b\u044e\u0431\u044b\u043c \u0441\u043f\u043e\u0441\u043e\u0431\u043e\u043c.\r\n\u0421\u043f\u0438\u0441\u043e\u043a \u0442\u0438\u043f\u043e\u0432 \u0438 \u0441\u0442\u0430\u0442\u0443\u0441\u043e\u0432.\r\n\u0414\u043e\u0431\u0430\u0432\u043b\u0435\u043d\u0438\u0435 \u0442\u0438\u043f\u0430 \u0438 \u0441\u0442\u0430\u0442\u0443\u0441\u0430.\r\n\u0420\u0435\u0434\u0430\u043a\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u0442\u0438\u043f\u0430 \u0438 \u0441\u0442\u0430\u0442\u0443\u0441\u0430.\r\n\u0423\u0434\u0430\u043b\u0435\u043d\u0438\u0435 \u0442\u0438\u043f\u0430 \u0438 \u0441\u0442\u0430\u0442\u0443\u0441\u0430.",
-    "status": 3,
-    "type": 1,
-    "create_date": "2019-10-09T09:26:17.039Z",
-    "update_date": "2019-10-14T11:54:08.977Z",
-    "project": 1
-  }
-},
-{
-  "model": "webapp.issue",
-  "pk": 3,
-  "fields": {
-    "summary": "\u0412\u0441\u0442\u0440\u043e\u0435\u043d\u043d\u044b\u0435 \u043a\u043b\u0430\u0441\u0441\u044b \u043f\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043b\u0435\u043d\u0438\u0439",
-    "description": "\u041f\u0440\u0438\u043c\u0435\u043d\u0438\u0442\u044c \u043a\u043b\u0430\u0441\u0441\u044b \u043f\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043b\u0435\u043d\u0438\u0439:\r\nCreateView\r\nUpdateView\r\nDetailView\r\nDeleteView",
-    "status": 3,
-    "type": 3,
-    "create_date": "2019-10-09T09:28:50.974Z",
-    "update_date": "2019-10-14T11:54:08.977Z",
-    "project": 1
-  }
-},
-{
-  "model": "webapp.issue",
-  "pk": 4,
-  "fields": {
-    "summary": "\u0422\u0435\u0441\u0442\u043e\u0432\u0430\u044f \u0437\u0430\u0434\u0430\u0447\u0430",
-    "description": "",
-    "status": 1,
-    "type": 1,
-    "create_date": "2019-10-09T09:29:26.888Z",
-    "update_date": "2019-10-14T11:54:08.977Z",
-    "project": 2
-  }
-},
-{
-  "model": "webapp.issue",
-  "pk": 5,
-  "fields": {
-    "summary": "\u0414\u043e\u0431\u0430\u0432\u044c\u0442\u0435 \u043c\u043e\u0434\u0435\u043b\u0438",
-    "description": "\u0414\u043e\u0431\u0430\u0432\u044c\u0442\u0435 \u043c\u043e\u0434\u0435\u043b\u044c \u043f\u0440\u043e\u0435\u043a\u0442\u0430, Project, \u0441\u043e \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u043c\u0438 \u043f\u043e\u043b\u044f\u043c\u0438:\r\n\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u043f\u0440\u043e\u0435\u043a\u0442\u0430 - \u0441\u0442\u0440\u043e\u043a\u0430, \u043e\u0431\u044f\u0437\u0430\u0442\u0435\u043b\u044c\u043d\u043e\u0435;\r\n\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u043f\u0440\u043e\u0435\u043a\u0442\u0430 - \u0442\u0435\u043a\u0441\u0442, \u043d\u0435\u043e\u0431\u044f\u0437\u0430\u0442\u0435\u043b\u044c\u043d\u043e\u0435;\r\n\u0414\u0430\u0442\u0430 \u0441\u043e\u0437\u0434\u0430\u043d\u0438\u044f - \u0434\u0430\u0442\u0430 \u0438 \u0432\u0440\u0435\u043c\u044f, \u0430\u0432\u0442\u043e\u0437\u0430\u043f\u043e\u043b\u043d\u0435\u043d\u0438\u0435;\r\n\u0414\u0430\u0442\u0430 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u044f - \u0434\u0430\u0442\u0430 \u0438 \u0432\u0440\u0435\u043c\u044f, \u0430\u0432\u0442\u043e\u0437\u0430\u043f\u043e\u043b\u043d\u0435\u043d\u0438\u0435.",
-    "status": 2,
-    "type": 1,
-    "create_date": "2019-10-09T09:30:52.103Z",
-    "update_date": "2019-10-14T11:54:08.977Z",
-    "project": 3
-  }
-},
-{
-  "model": "webapp.issue",
-  "pk": 6,
-  "fields": {
-    "summary": "CRUD \u0434\u043b\u044f \u043f\u0440\u043e\u0435\u043a\u0442\u043e\u0432",
-    "description": "\u0421\u043e\u0437\u0434\u0430\u0439\u0442\u0435 \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0435 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u044b CRUD \u0434\u043b\u044f \u043f\u0440\u043e\u0435\u043a\u0442\u043e\u0432 \u043d\u0430 \u0431\u0430\u0437\u0435 \u0432\u0441\u0442\u0440\u043e\u0435\u043d\u043d\u044b\u0445 \u043f\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043b\u0435\u043d\u0438\u0439.",
-    "status": 2,
-    "type": 1,
-    "create_date": "2019-10-09T09:31:41.166Z",
-    "update_date": "2019-10-14T11:54:08.977Z",
-    "project": 3
-  }
-},
-{
-  "model": "webapp.issue",
-  "pk": 7,
-  "fields": {
-    "summary": "\u0417\u0430\u0434\u0430\u0447\u0430 \u0434\u043b\u044f \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438",
-    "description": "\u0422\u0435\u0441\u0442\r\n\u0422\u0415\u0421\u0422 \u0442\u0435\u0441\u0442 \u0442\u0435\u0441\u0442",
-    "status": 3,
-    "type": 2,
-    "create_date": "2019-10-09T09:32:33.558Z",
-    "update_date": "2019-10-14T11:54:08.977Z",
-    "project": 2
-  }
-},
-{
-  "model": "webapp.issue",
-  "pk": 17,
-  "fields": {
-    "summary": "\u0417\u0430\u0434\u0430\u0447\u0430",
-    "description": "\u041f\u0440\u043e\u0441\u0442\u043e \u043e\u043f\u0438\u0441\u0430\u043d\u0438\u0435\r\n\u0442\u0435\u0441\u0442",
-    "status": 3,
-    "type": 1,
-    "create_date": "2019-10-13T16:35:21.469Z",
-    "update_date": "2019-10-14T11:54:08.977Z",
-    "project": 5
-  }
-},
-{
-  "model": "webapp.issue",
-  "pk": 18,
-  "fields": {
-    "summary": "\u0417\u0430\u043a\u0440\u044b\u0442\u0430\u044f \u0437\u0430\u0434\u0430\u0447\u0430",
-    "description": "\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0437\u0430\u043a\u0440\u044b\u0442\u043e\u0439 \u0437\u0430\u0434\u0430\u0447\u0438",
-    "status": 3,
-    "type": 1,
-    "create_date": "2019-10-13T16:35:58.007Z",
-    "update_date": "2019-10-14T11:54:08.977Z",
-    "project": 5
-  }
-},
-{
   "model": "webapp.status",
   "pk": 1,
   "fields": {
@@ -179,7 +62,7 @@
     "summary": "\u0422\u0440\u0435\u043a\u0435\u0440 \u0437\u0430\u0434\u0430\u0447",
     "description": "\u0421\u043e\u0437\u0434\u0430\u043d\u0438\u0435 \u0442\u0440\u0435\u043a\u0435\u0440\u0430 \u0437\u0430\u0434\u0430\u0447 \u0434\u043b\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0438\u0441\u0442\u043e\u0432.",
     "create_date": "2019-10-09T09:15:20.453Z",
-    "update_date": "2019-10-12T16:46:46.689Z",
+    "update_date": "2019-11-04T05:01:49.303Z",
     "status": "active"
   }
 },
@@ -221,7 +104,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$150000$cubTEpIwX2Us$kjOGVuDnnbQlTELs+qDFNjJtUwHVGE7XWCqbG6W6FuI=",
-    "last_login": "2019-11-03T19:15:33.709Z",
+    "last_login": "2019-11-07T12:41:39.796Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "\u0410\u0434\u043c\u0438\u043d",
@@ -239,7 +122,7 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$150000$mYYmY9M7udUD$Qufja9MR25Qi1JiHS1zpADzOq4uaI71WyTGh43S0pW0=",
-    "last_login": "2019-11-03T19:15:47.280Z",
+    "last_login": "2019-11-05T11:51:02.397Z",
     "is_superuser": false,
     "username": "artem",
     "first_name": "\u0410\u0440\u0442\u0435\u043c",
@@ -257,7 +140,7 @@
   "pk": 3,
   "fields": {
     "password": "pbkdf2_sha256$150000$EHfi2ZK3dCOB$LlTZEq6WAU1E1V8CpCi8EsM3K11wKg2XMWvpUiduzik=",
-    "last_login": "2019-11-02T13:03:20.534Z",
+    "last_login": "2019-11-07T12:40:56.952Z",
     "is_superuser": false,
     "username": "user",
     "first_name": "\u041f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c",
@@ -275,7 +158,7 @@
   "pk": 4,
   "fields": {
     "password": "pbkdf2_sha256$150000$bYFeZdTUmPmF$ZFPIwXFDZn3/Ozhp7G+0SfzkHp5ibFB7OMrm6kruqSw=",
-    "last_login": "2019-11-03T19:19:10.541Z",
+    "last_login": "2019-11-07T12:40:31.814Z",
     "is_superuser": false,
     "username": "test",
     "first_name": "\u0422\u0435\u0441\u0442",
@@ -406,6 +289,177 @@
     "project": 5,
     "start_date": "2019-11-03",
     "end_date": null
+  }
+},
+{
+  "model": "webapp.issue",
+  "pk": 1,
+  "fields": {
+    "summary": "\u041f\u0430\u0433\u0438\u043d\u0430\u0446\u0438\u044f \u0437\u0430\u0434\u0430\u0447",
+    "description": "\u0420\u0435\u0430\u043b\u0438\u0437\u043e\u0432\u0430\u0442\u044c \u043f\u0430\u0433\u0438\u043d\u0430\u0446\u0438\u044e \u043d\u0430 \u0433\u043b\u0430\u0432\u043d\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435",
+    "status": 3,
+    "type": 3,
+    "create_date": "2019-10-09T09:22:40.299Z",
+    "update_date": "2019-11-07T12:55:04.915Z",
+    "project": 1,
+    "created_by": [
+      "admin"
+    ],
+    "assigned_to": [
+      "artem"
+    ]
+  }
+},
+{
+  "model": "webapp.issue",
+  "pk": 2,
+  "fields": {
+    "summary": "CRUD \u0434\u043b\u044f \u0442\u0438\u043f\u043e\u0432 \u0438 \u0441\u0442\u0430\u0442\u0443\u0441\u043e\u0432",
+    "description": "\u0421\u043e\u0437\u0434\u0430\u0442\u044c \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u044b CRUD \u0434\u043b\u044f \u0442\u0438\u043f\u043e\u0432 \u0438 \u0441\u0442\u0430\u0442\u0443\u0441\u043e\u0432 \u043b\u044e\u0431\u044b\u043c \u0441\u043f\u043e\u0441\u043e\u0431\u043e\u043c.\r\n\u0421\u043f\u0438\u0441\u043e\u043a \u0442\u0438\u043f\u043e\u0432 \u0438 \u0441\u0442\u0430\u0442\u0443\u0441\u043e\u0432.\r\n\u0414\u043e\u0431\u0430\u0432\u043b\u0435\u043d\u0438\u0435 \u0442\u0438\u043f\u0430 \u0438 \u0441\u0442\u0430\u0442\u0443\u0441\u0430.\r\n\u0420\u0435\u0434\u0430\u043a\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u0442\u0438\u043f\u0430 \u0438 \u0441\u0442\u0430\u0442\u0443\u0441\u0430.\r\n\u0423\u0434\u0430\u043b\u0435\u043d\u0438\u0435 \u0442\u0438\u043f\u0430 \u0438 \u0441\u0442\u0430\u0442\u0443\u0441\u0430.",
+    "status": 3,
+    "type": 1,
+    "create_date": "2019-10-09T09:26:17.039Z",
+    "update_date": "2019-11-07T12:54:53.714Z",
+    "project": 1,
+    "created_by": [
+      "admin"
+    ],
+    "assigned_to": [
+      "artem"
+    ]
+  }
+},
+{
+  "model": "webapp.issue",
+  "pk": 3,
+  "fields": {
+    "summary": "\u0412\u0441\u0442\u0440\u043e\u0435\u043d\u043d\u044b\u0435 \u043a\u043b\u0430\u0441\u0441\u044b \u043f\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043b\u0435\u043d\u0438\u0439",
+    "description": "\u041f\u0440\u0438\u043c\u0435\u043d\u0438\u0442\u044c \u043a\u043b\u0430\u0441\u0441\u044b \u043f\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043b\u0435\u043d\u0438\u0439:\r\nCreateView\r\nUpdateView\r\nDetailView\r\nDeleteView",
+    "status": 3,
+    "type": 3,
+    "create_date": "2019-10-09T09:28:50.974Z",
+    "update_date": "2019-10-14T11:54:08.977Z",
+    "project": 1,
+    "created_by": [
+      "admin"
+    ],
+    "assigned_to": [
+      "admin"
+    ]
+  }
+},
+{
+  "model": "webapp.issue",
+  "pk": 4,
+  "fields": {
+    "summary": "\u0422\u0435\u0441\u0442\u043e\u0432\u0430\u044f \u0437\u0430\u0434\u0430\u0447\u0430",
+    "description": "",
+    "status": 1,
+    "type": 1,
+    "create_date": "2019-10-09T09:29:26.888Z",
+    "update_date": "2019-10-14T11:54:08.977Z",
+    "project": 2,
+    "created_by": [
+      "admin"
+    ],
+    "assigned_to": [
+      "admin"
+    ]
+  }
+},
+{
+  "model": "webapp.issue",
+  "pk": 5,
+  "fields": {
+    "summary": "\u0414\u043e\u0431\u0430\u0432\u044c\u0442\u0435 \u043c\u043e\u0434\u0435\u043b\u0438",
+    "description": "\u0414\u043e\u0431\u0430\u0432\u044c\u0442\u0435 \u043c\u043e\u0434\u0435\u043b\u044c \u043f\u0440\u043e\u0435\u043a\u0442\u0430, Project, \u0441\u043e \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u043c\u0438 \u043f\u043e\u043b\u044f\u043c\u0438:\r\n\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u043f\u0440\u043e\u0435\u043a\u0442\u0430 - \u0441\u0442\u0440\u043e\u043a\u0430, \u043e\u0431\u044f\u0437\u0430\u0442\u0435\u043b\u044c\u043d\u043e\u0435;\r\n\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u043f\u0440\u043e\u0435\u043a\u0442\u0430 - \u0442\u0435\u043a\u0441\u0442, \u043d\u0435\u043e\u0431\u044f\u0437\u0430\u0442\u0435\u043b\u044c\u043d\u043e\u0435;\r\n\u0414\u0430\u0442\u0430 \u0441\u043e\u0437\u0434\u0430\u043d\u0438\u044f - \u0434\u0430\u0442\u0430 \u0438 \u0432\u0440\u0435\u043c\u044f, \u0430\u0432\u0442\u043e\u0437\u0430\u043f\u043e\u043b\u043d\u0435\u043d\u0438\u0435;\r\n\u0414\u0430\u0442\u0430 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u044f - \u0434\u0430\u0442\u0430 \u0438 \u0432\u0440\u0435\u043c\u044f, \u0430\u0432\u0442\u043e\u0437\u0430\u043f\u043e\u043b\u043d\u0435\u043d\u0438\u0435.",
+    "status": 2,
+    "type": 1,
+    "create_date": "2019-10-09T09:30:52.103Z",
+    "update_date": "2019-11-07T12:54:38.568Z",
+    "project": 3,
+    "created_by": [
+      "admin"
+    ],
+    "assigned_to": [
+      "user"
+    ]
+  }
+},
+{
+  "model": "webapp.issue",
+  "pk": 6,
+  "fields": {
+    "summary": "CRUD \u0434\u043b\u044f \u043f\u0440\u043e\u0435\u043a\u0442\u043e\u0432",
+    "description": "\u0421\u043e\u0437\u0434\u0430\u0439\u0442\u0435 \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0435 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u044b CRUD \u0434\u043b\u044f \u043f\u0440\u043e\u0435\u043a\u0442\u043e\u0432 \u043d\u0430 \u0431\u0430\u0437\u0435 \u0432\u0441\u0442\u0440\u043e\u0435\u043d\u043d\u044b\u0445 \u043f\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043b\u0435\u043d\u0438\u0439.",
+    "status": 2,
+    "type": 1,
+    "create_date": "2019-10-09T09:31:41.166Z",
+    "update_date": "2019-11-07T12:51:07.497Z",
+    "project": 3,
+    "created_by": [
+      "admin"
+    ],
+    "assigned_to": [
+      "user"
+    ]
+  }
+},
+{
+  "model": "webapp.issue",
+  "pk": 7,
+  "fields": {
+    "summary": "\u0417\u0430\u0434\u0430\u0447\u0430 \u0434\u043b\u044f \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438",
+    "description": "\u0422\u0435\u0441\u0442\r\n\u0422\u0415\u0421\u0422 \u0442\u0435\u0441\u0442 \u0442\u0435\u0441\u0442",
+    "status": 3,
+    "type": 2,
+    "create_date": "2019-10-09T09:32:33.558Z",
+    "update_date": "2019-11-07T12:54:21.780Z",
+    "project": 2,
+    "created_by": [
+      "admin"
+    ],
+    "assigned_to": [
+      "user"
+    ]
+  }
+},
+{
+  "model": "webapp.issue",
+  "pk": 17,
+  "fields": {
+    "summary": "\u0417\u0430\u0434\u0430\u0447\u0430",
+    "description": "\u041f\u0440\u043e\u0441\u0442\u043e \u043e\u043f\u0438\u0441\u0430\u043d\u0438\u0435\r\n\u0442\u0435\u0441\u0442",
+    "status": 3,
+    "type": 1,
+    "create_date": "2019-10-13T16:35:21.469Z",
+    "update_date": "2019-10-14T11:54:08.977Z",
+    "project": 5,
+    "created_by": [
+      "admin"
+    ],
+    "assigned_to": [
+      "admin"
+    ]
+  }
+},
+{
+  "model": "webapp.issue",
+  "pk": 18,
+  "fields": {
+    "summary": "\u0417\u0430\u043a\u0440\u044b\u0442\u0430\u044f \u0437\u0430\u0434\u0430\u0447\u0430",
+    "description": "\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0437\u0430\u043a\u0440\u044b\u0442\u043e\u0439 \u0437\u0430\u0434\u0430\u0447\u0438",
+    "status": 3,
+    "type": 1,
+    "create_date": "2019-10-13T16:35:58.007Z",
+    "update_date": "2019-11-07T12:53:51.252Z",
+    "project": 5,
+    "created_by": [
+      "admin"
+    ],
+    "assigned_to": [
+      "user"
+    ]
   }
 }
 ]

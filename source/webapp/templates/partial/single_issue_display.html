@@ -10,6 +10,8 @@
             <th scope="col">Тип:</th>
             <th scope="col">Проект:</th>
             <th scope="col">Статус:</th>
+            <th scope="col">Создатель:</th>
+            <th scope="col">Исполнитель:</th>
         </tr>
         </thead>
         <tbody>
@@ -18,6 +20,8 @@
             <td class="text-primary">{{ issue.type }}</td>
             <td class="text-primary"><a href="{% url 'webapp:project_detail' issue.project.pk %}">{{ issue.project }}</a></td>
             <td class="text-primary">{{ issue.status }}</td>
+            <td class="text-primary">{{ issue.created_by }}</td>
+            <td class="text-primary">{{ issue.assigned_to }}</td>
         </tr>
         </tbody>
     </table>
