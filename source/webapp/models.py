@@ -17,6 +17,8 @@ class Issue(models.Model):
     create_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     update_date = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
     project = models.ForeignKey('webapp.Project', related_name='issues', on_delete=models.PROTECT, verbose_name='Проект')
+    created_by = models.ForeignKey(User, related_name='created_issues', on_delete=models.PROTECT, verbose_name='Создатель')
+    assigned_to = models.ForeignKey(User, related_name='assigned_issues', on_delete=models.PROTECT, verbose_name='Исполнитель')
 
     def __str__(self):
         return self.summary

@@ -1,15 +1,13 @@
 from django import forms
+from django.contrib.auth.models import User
+
 from webapp.models import Issue, Status, Type, Project
 
 
 class IssueForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['project'].queryset = Project.objects.all().filter(status__icontains='active')
-
     class Meta:
         model = Issue
-        exclude = ['create_date']
+        exclude = ['create_date', 'created_by']
 
 
 class StatusForm(forms.ModelForm):
@@ -31,9 +29,15 @@ class ProjectForm(forms.ModelForm):
 
 
 class IssueProjectForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.projects = kwargs.pop('projects')
+        print(self.projects)
+        super().__init__(*args, **kwargs)
+        self.fields['assigned_to'].queryset = User.objects.filter(teams__project__in=self.projects)
+
     class Meta:
         model = Issue
-        exclude = ['create_date', 'project']
+        exclude = ['create_date', 'project', 'created_by']
 
 
 class SimpleSearchForm(forms.Form):

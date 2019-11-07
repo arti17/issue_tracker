@@ -3,7 +3,7 @@ from .models import Issue, Status, Type, Project, Team
 
 
 class IssueAdmin(admin.ModelAdmin):
-    list_display = ['summary', 'status', 'type', 'create_date']
+    list_display = ['summary', 'status', 'type', 'create_date', 'assigned_to', 'created_by']
     list_filter = ['status', 'type']
     search_fields = ['summary']
 

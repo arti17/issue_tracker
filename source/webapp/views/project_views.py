@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.models import User
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
@@ -73,8 +74,15 @@ class ProjectCreateIssueView(LoginRequiredMixin, UserPassesTestMixin, CreateView
     def form_valid(self, form):
         project_pk = self.kwargs.get('pk')
         project = get_object_or_404(Project, pk=project_pk)
-        project.issues.create(**form.cleaned_data)
+        project.issues.create(created_by=self.request.user, **form.cleaned_data)
         return redirect('webapp:project_detail', pk=project_pk)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        project_pk = self.kwargs.get('pk')
+        project = Project.objects.filter(pk=project_pk)
+        kwargs['projects'] = project
+        return kwargs
 
 
 class ProjectDeleteView(LoginRequiredMixin, DeleteView):

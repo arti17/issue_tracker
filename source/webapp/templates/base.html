@@ -20,7 +20,7 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-item nav-link" href="{% url 'webapp:index' %}">На главную</a>
-                    {% if user.is_authenticated %}
+                    {% if user.is_authenticated and user.is_superuser %}
                         <a class="nav-item nav-link" href="{% url 'webapp:create_issue' %}">Создать задачу</a>
                     {% endif %}
                     <a class="nav-item nav-link" href="{% url 'webapp:statuses_list' %}">Статусы задач</a>

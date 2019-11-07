@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.utils.http import urlencode
@@ -66,6 +66,12 @@ class IssueCreateView(LoginRequiredMixin, CreateView):
             user_projects.append(team.project)
         form.fields['project'].queryset = Project.objects.filter(summary__in=user_projects).filter(status='active')
         return form
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.created_by = self.request.user
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
         return reverse('webapp:index')
