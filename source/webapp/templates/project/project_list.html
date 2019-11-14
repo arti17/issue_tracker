@@ -34,7 +34,7 @@
             </ul>
         </div>
     </div>
-    {% if user.is_authenticated %}
+    {% if user.is_authenticated and perms.webapp.add_project %}
     <form action="{% url 'webapp:create_project' %}">
         <button type="submit" class="btn btn-success mt-3 col-4 offset-4">Добавить проект</button>
     </form>
