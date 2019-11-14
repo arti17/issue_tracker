@@ -1,10 +1,12 @@
+from datetime import datetime
+
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 
-from webapp.forms import ProjectForm, IssueProjectForm, SimpleSearchForm
+from webapp.forms import ProjectForm, IssueProjectForm, SimpleSearchForm, AddProjectUsersForm
 from webapp.models import Project, PROJECT_STATUS_BLOCKED, PROJECT_STATUS_ACTIVE, Team, Issue
 
 
@@ -45,6 +47,9 @@ class ProjectDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['issues'] = context['project'].issues.order_by('-create_date')
+        project_pk = self.kwargs.get('pk')
+        teams = Team.objects.filter(project=project_pk, end_date=None)
+        context['teams'] = teams
         return context
 
 
@@ -52,6 +57,26 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
     template_name = 'project/create_project.html'
     model = Project
     form_class = ProjectForm
+
+    def form_valid(self, form):
+        self.object = form.save()
+        users = form.cleaned_data['users']
+        date = datetime.now()
+        self.add_created_user()
+        for user in users:
+            Team.objects.create(user=user, project=self.object, start_date=date)
+        return redirect(self.get_success_url())
+
+    def get_form(self, form_class=None):
+        form = super().get_form()
+        form.fields['users'].queryset = User.objects.all().exclude(username=self.request.user)
+        return form
+
+    def add_created_user(self):
+        user = self.request.user
+        project = self.object
+        date = datetime.now()
+        Team.objects.create(user=user, project=project, start_date=date)
 
     def get_success_url(self):
         return reverse('webapp:projects_list')
@@ -62,10 +87,9 @@ class ProjectCreateIssueView(LoginRequiredMixin, UserPassesTestMixin, CreateView
     form_class = IssueProjectForm
 
     def test_func(self):
-        issue_pk = self.kwargs.get('pk')
-        issue = Issue.objects.get(pk=issue_pk)
-        project = issue.project
-        teams = Team.objects.filter(project=project)
+        project_pk = self.kwargs.get('pk')
+        project = Project.objects.get(pk=project_pk)
+        teams = Team.objects.filter(project=project.pk)
         users_id = []
         for team in teams:
             users_id.append(team.user.pk)
@@ -108,3 +132,41 @@ class ProjectUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('webapp:projects_list')
+
+
+class AddProjectUsers(LoginRequiredMixin, CreateView):
+    template_name = 'project/add_project_users.html'
+    model = Team
+    form_class = AddProjectUsersForm
+
+    def form_valid(self, form):
+        users = form.cleaned_data['users']
+        project = self.get_project()
+        date = datetime.now()
+        for user in users:
+            Team.objects.create(user=user, project=project, start_date=date)
+        return redirect('webapp:project_detail', project.pk)
+
+    def get_form(self, form_class=None):
+        form = super().get_form()
+        project = self.get_project()
+        teams = Team.objects.filter(project=project.pk)
+        users = []
+        for team in teams:
+            users.append(team.user)
+        form.fields['users'].queryset = User.objects.all().exclude(username__in=users)
+        return form
+
+    def get_success_url(self):
+        return reverse('webapp:project_detail', kwargs={'pk': self.object.pk})
+
+    def get_context_data(self, **kwargs):
+        pk = self.kwargs.get('pk')
+        context = super().get_context_data(**kwargs)
+        project = get_object_or_404(Project.objects.filter(pk=pk))
+        context['project'] = project
+        return context
+
+    def get_project(self):
+        pk = self.kwargs.get('pk')
+        return get_object_or_404(Project, pk=pk)

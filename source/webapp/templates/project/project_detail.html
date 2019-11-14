@@ -35,6 +35,17 @@
                 <p class="mb-1"><a href="{% url 'webapp:issue_detail' issue.pk %}">{{ issue }}</a></p>
             {% endfor %}
         </div>
+
+        <div class="alert alert-primary">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Команда проекта:</h5>
+            </div>
+            {% for user in teams %}
+                <p class="mb-1 text-dark">{{ user.user.get_full_name }} <small class="text-info">в проекте с {{ user.start_date }}</small></p>
+            {% endfor %}
+            <a href="{% url 'webapp:add_project_users' project.pk %}" class="btn btn-primary btn-sm">Добавить участников</a>
+            <a href="" class="btn btn-danger btn-sm">Удалить участников</a>
+        </div>
     </div>
 
     {% if project.status == 'active' and user.is_authenticated %}

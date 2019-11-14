@@ -23,9 +23,19 @@ class TypeForm(forms.ModelForm):
 
 
 class ProjectForm(forms.ModelForm):
+    users = forms.ModelMultipleChoiceField(queryset=User.objects.all(), required=False)
+
     class Meta:
         model = Project
-        fields = ['summary', 'description']
+        fields = ['summary', 'description', 'users']
+
+
+class AddProjectUsersForm(forms.ModelForm):
+    users = forms.ModelMultipleChoiceField(queryset=User.objects.all(), required=False, label='Участники')
+
+    class Meta:
+        model = User
+        fields = ['users']
 
 
 class IssueProjectForm(forms.ModelForm):
