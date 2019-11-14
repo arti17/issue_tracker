@@ -41,15 +41,23 @@
                 <h5 class="mb-1">Команда проекта:</h5>
             </div>
             {% for user in teams %}
-                <p class="mb-1 text-dark">{{ user.user.get_full_name }} <small class="text-info">в проекте с {{ user.start_date }}</small></p>
+                <p class="mb-1 text-dark d-flex justify-content-between">
+                    <span>{{ user.user.get_full_name }}
+                    <small class="text-info">в проекте с {{ user.start_date }}</small></span>
+                <form action="{% url 'webapp:delete_project_user' project.pk %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="user" value="{{ user.user.pk }}">
+                    <input type="submit" value="Исключить {{ user.user.get_full_name }}" class="btn btn-danger btn-sm">
+                </form>
+                </p>
             {% endfor %}
             <a href="{% url 'webapp:add_project_users' project.pk %}" class="btn btn-primary btn-sm">Добавить участников</a>
-            <a href="" class="btn btn-danger btn-sm">Удалить участников</a>
         </div>
     </div>
 
     {% if project.status == 'active' and user.is_authenticated %}
-        <a href="{% url 'webapp:create_project_issue' project.pk %}" class="btn btn-success mt-3 col-4 offset-4">Создать задачу
+        <a href="{% url 'webapp:create_project_issue' project.pk %}" class="btn btn-success mt-3 col-4 offset-4">Создать
+            задачу
             для проекта</a>
     {% endif %}
     <button onclick="history.back();" class="btn btn-primary mt-3 col-4 offset-4">Назад</button>

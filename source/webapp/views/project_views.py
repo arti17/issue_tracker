@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
+from django.views.generic.base import View
 
 from webapp.forms import ProjectForm, IssueProjectForm, SimpleSearchForm, AddProjectUsersForm
 from webapp.models import Project, PROJECT_STATUS_BLOCKED, PROJECT_STATUS_ACTIVE, Team, Issue
@@ -170,3 +171,14 @@ class AddProjectUsers(LoginRequiredMixin, CreateView):
     def get_project(self):
         pk = self.kwargs.get('pk')
         return get_object_or_404(Project, pk=pk)
+
+
+class DeleteProjectUser(View):
+    def post(self, request, *args, **kwargs):
+        project_id = kwargs.get('pk')
+        user_id = request.POST.get('user')
+        team = Team.objects.get(project=project_id, user=int(user_id), end_date__isnull=True)
+        date = datetime.now()
+        team.end_date = date
+        team.save()
+        return redirect(reverse('webapp:project_detail', kwargs={'pk': project_id}))
