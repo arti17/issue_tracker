@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
@@ -54,10 +54,12 @@ class ProjectDetailView(DetailView):
         return context
 
 
-class ProjectCreateView(LoginRequiredMixin, CreateView):
+class ProjectCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'project/create_project.html'
     model = Project
     form_class = ProjectForm
+    permission_required = 'webapp.add_project'
+    permission_denied_message = "Доступ запрещён"
 
     def form_valid(self, form):
         self.object = form.save()
@@ -83,9 +85,11 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
         return reverse('webapp:projects_list')
 
 
-class ProjectCreateIssueView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+class ProjectCreateIssueView(UserPassesTestMixin, PermissionRequiredMixin, CreateView):
     template_name = 'issue/create_issue.html'
     form_class = IssueProjectForm
+    permission_required = 'webapp.change_issue'
+    permission_denied_message = "Доступ запрещён"
 
     def test_func(self):
         project_pk = self.kwargs.get('pk')
@@ -110,8 +114,10 @@ class ProjectCreateIssueView(LoginRequiredMixin, UserPassesTestMixin, CreateView
         return kwargs
 
 
-class ProjectDeleteView(LoginRequiredMixin, DeleteView):
+class ProjectDeleteView(PermissionRequiredMixin, DeleteView):
     model = Project
+    permission_required = 'webapp.delete_project'
+    permission_denied_message = "Доступ запрещён"
 
     def get(self, request, *args, **kwargs):
         project_pk = kwargs.get('pk')
@@ -124,21 +130,25 @@ class ProjectDeleteView(LoginRequiredMixin, DeleteView):
         return reverse('webapp:projects_list')
 
 
-class ProjectUpdateView(LoginRequiredMixin, UpdateView):
+class ProjectUpdateView(PermissionRequiredMixin, UpdateView):
     model = Project
     class_form = ProjectForm
     template_name = 'project/update_project.html'
     context_object_name = 'project'
     fields = ['summary', 'description']
+    permission_required = 'webapp.change_project'
+    permission_denied_message = "Доступ запрещён"
 
     def get_success_url(self):
         return reverse('webapp:projects_list')
 
 
-class AddProjectUsers(LoginRequiredMixin, CreateView):
+class AddProjectUsers(PermissionRequiredMixin, CreateView):
     template_name = 'project/add_project_users.html'
     model = Team
     form_class = AddProjectUsersForm
+    permission_required = 'webapp.can_add_issue_for_project'
+    permission_denied_message = "Доступ запрещён"
 
     def form_valid(self, form):
         users = form.cleaned_data['users']
@@ -154,6 +164,8 @@ class AddProjectUsers(LoginRequiredMixin, CreateView):
         teams = Team.objects.filter(project=project.pk)
         users = []
         for team in teams:
+            if team.end_date:
+                continue
             users.append(team.user)
         form.fields['users'].queryset = User.objects.all().exclude(username__in=users)
         return form
@@ -173,7 +185,10 @@ class AddProjectUsers(LoginRequiredMixin, CreateView):
         return get_object_or_404(Project, pk=pk)
 
 
-class DeleteProjectUser(View):
+class DeleteProjectUser(PermissionRequiredMixin, View):
+    permission_required = 'webapp.delete_team'
+    permission_denied_message = "Доступ запрещён"
+
     def post(self, request, *args, **kwargs):
         project_id = kwargs.get('pk')
         user_id = request.POST.get('user')

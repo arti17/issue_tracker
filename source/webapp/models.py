@@ -26,6 +26,9 @@ class Issue(models.Model):
     class Meta:
         verbose_name = 'Задача'
         verbose_name_plural = 'Задачи'
+        permissions = [
+            ('can_add_issue_for_project', 'Может добавлять задачи к проекту')
+        ]
 
 
 class Status(models.Model):

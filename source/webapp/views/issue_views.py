@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
 from django.db.models import Q
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -52,10 +52,12 @@ class IssueView(DetailView):
     context_key = 'issue'
 
 
-class IssueCreateView(LoginRequiredMixin, CreateView):
+class IssueCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'issue/create_issue.html'
     model = Issue
     form_class = IssueForm
+    permission_required = 'webapp.add_issue'
+    permission_denied_message = "Доступ запрещён"
 
     def get_form(self, form_class=None):
         form = super().get_form()
@@ -77,12 +79,14 @@ class IssueCreateView(LoginRequiredMixin, CreateView):
         return reverse('webapp:index')
 
 
-class IssueUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class IssueUpdateView( UserPassesTestMixin, PermissionRequiredMixin, UpdateView):
     model = Issue
     class_form = IssueForm
     template_name = 'issue/update_issue.html'
     context_object_name = 'issue'
     fields = ['summary', 'description', 'status', 'type', 'project', 'assigned_to']
+    permission_required = 'webapp.change_issue'
+    permission_denied_message = "Доступ запрещён"
 
     def test_func(self):
         issue = self.get_object()
@@ -107,9 +111,11 @@ class IssueUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return reverse('webapp:index')
 
 
-class IssueDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class IssueDeleteView(UserPassesTestMixin, PermissionRequiredMixin, DeleteView):
     model = Issue
     success_url = reverse_lazy('webapp:index')
+    permission_required = 'webapp.delete_issue'
+    permission_denied_message = "Доступ запрещён"
 
     def get(self, request, *args, **kwargs):
         issue = self.get_object()
