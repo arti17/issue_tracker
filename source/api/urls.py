@@ -5,6 +5,7 @@ from api import views
 
 router = routers.DefaultRouter()
 router.register(r'issues', views.IssueViewSet)
+router.register(r'projects', views.ProjectViewSet)
 
 app_name = 'api'
 
