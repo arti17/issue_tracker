@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from rest_framework import viewsets
+from webapp.models import Issue
+from api.serializers import IssueSerializer
 
-# Create your views here.
+
+class IssueViewSet(viewsets.ModelViewSet):
+    queryset = Issue.objects.all()
+    serializer_class = IssueSerializer
