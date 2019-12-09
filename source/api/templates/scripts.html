@@ -1,0 +1,100 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Requests</title>
+</head>
+<body>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script>
+    $(document).ready(function () {
+    // Авторизация
+    $.ajax({
+        url: 'http://localhost:8000/api/login/',
+        method: 'post',
+        data: JSON.stringify({username: 'admin', password: 'admin'}),
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (response, status) {
+            localStorage.setItem('apiToken', 'Token ' + response.token);
+        },
+        error: function (response, status) {
+            console.log(response)
+        }
+    })
+
+// Вывод всех проектов
+    $.ajax({
+        url: 'http://localhost:8000/api/projects/',
+        method: 'get',
+        dataType: 'json',
+        contentType: 'application/json',
+        headers: {'Authorization': localStorage.getItem('apiToken')},
+        success: (response, status) => console.log(response),
+        error: (response, status) => console.log(response)
+    })
+
+// Вывод всех задач
+    $.ajax({
+        url: 'http://localhost:8000/api/issues/',
+        method: 'get',
+        dataType: 'json',
+        contentType: 'application/json',
+        headers: {'Authorization': localStorage.getItem('apiToken')},
+        success: (response, status) => console.log(response),
+        error: (response, status) => console.log(response)
+    })
+
+// Вывод задач указанного проекта
+    $.ajax({
+        url: 'http://localhost:8000/api/projects/1/',
+        method: 'get',
+        dataType: 'json',
+        contentType: 'application/json',
+        headers: {'Authorization': localStorage.getItem('apiToken')},
+        success: (response, status) => console.log(response.issues),
+        error: (response, status) => console.log(response)
+    })
+
+// Создание задачи
+    issue = {
+        "summary": "Test",
+        "description": "Test description",
+        "status": 1,
+        "type": 1,
+        "project": 1,
+        "created_by": 1,
+        "assigned_to": 2
+    }
+
+    $.ajax({
+        url: 'http://localhost:8000/api/issues/',
+        method: 'post',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(issue),
+        headers: {'Authorization': localStorage.getItem('apiToken')},
+        success: (response, status) => console.log(response),
+        error: (response, status) => console.log(response)
+    })
+
+//Удаление задачи
+    $.ajax({
+        url: 'http://localhost:8000/api/issues/1/',
+        method: 'delete',
+        dataType: 'json',
+        contentType: 'application/json',
+        headers: {'Authorization': localStorage.getItem('apiToken')},
+        success: (response, status) => console.log(status),
+        error: (response, status) => console.log(response)
+    })
+
+})
+</script>
+</body>
+</html>

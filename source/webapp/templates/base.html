@@ -27,6 +27,7 @@
                     <a class="nav-item nav-link" href="{% url 'webapp:types_list' %}">Типы задач</a>
                     <a class="nav-item nav-link" href="{% url 'webapp:projects_list' %}">Проекты</a>
                     <a class="nav-item nav-link" href="{% url 'accounts:users_list' %}">Пользователи</a>
+                    <a class="nav-item nav-link" href="{% url 'api:requests' %}">Аякс</a>
                 </div>
                 <div class="navbar-nav ml-auto">
                     {% if user.is_authenticated %}
